@@ -1,0 +1,37 @@
+@startuml parkinglot
+skinparam Shadowing false
+skinparam class {
+    BackgroundColor PaleTurquoise 
+    ArrowCollor SeaGreen
+}
+
+class ParkingLot <<Entity>> {
+    -ParkingLotId id
+    -Map<String, String> ticketToCarMap
+    --
+    +Ticket park(String carId)
+    +String pick(String ticketId)
+}
+
+class GraduateParkingBoy <<Entity>> {
+    -GraduateParkingBoyId id
+    -List<ParkingLot> parkingLots
+    --
+    +Ticket park(String carId)
+}
+
+class Ticket <<Value Object>> {
+    -String id
+    -String carId
+    -String parkingLotId
+}
+
+class Car <<Value Object>> {
+    -String id
+}
+
+ParkingLot "1" o-- "1..*" Ticket
+GraduateParkingBoy "1" o-- "1..*" ParkingLot
+
+
+@enduml
