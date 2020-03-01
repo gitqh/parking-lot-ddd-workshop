@@ -5,19 +5,19 @@ skinparam class {
     ArrowCollor SeaGreen
 }
 
-class ParkingLot <<Entity>> {
-    -ParkingLotId id
-    -Map<String, String> ticketToCarMap
-    --
-    +Ticket park(String carId)
-    +String pick(String ticketId)
-}
-
 class GraduateParkingBoy <<Entity>> {
     -GraduateParkingBoyId id
     -List<ParkingLot> parkingLots
     --
     +Ticket park(String carId)
+}
+
+class ParkingLot <<Value Object>> {
+    -Long id
+    -Map<String, String> ticketToCarMap
+    --
+    +Ticket park(String carId)
+    +String pick(String ticketId)
 }
 
 class Ticket <<Value Object>> {
@@ -26,7 +26,7 @@ class Ticket <<Value Object>> {
     -String parkingLotId
 }
 
-class Car <<Value Object>> {
+class LicensePlate <<Value Object>> {
     -String id
 }
 
