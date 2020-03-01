@@ -13,13 +13,16 @@ public class ParkingBoyDTOMapper {
 
     public ParkingBoyDTO from(GraduateParkingBoy parkingBoy) {
         List<ParkingLotDTO> parkingLotDTOs = parkingBoy.getParkingLots().stream()
-                .map(lot -> ParkingLotDTO.builder().capacity(lot.getCapacity()).build())
+                .map(lot -> ParkingLotDTO.builder()
+                        .capacity(lot.getCapacity())
+                        .availableCapacity(lot.availableCapacity())
+                        .build())
                 .collect(Collectors.toList());
 
         return ParkingBoyDTO.builder()
                 .name(parkingBoy.getName())
                 .parkingBoyId(parkingBoy.getParkingBoyId().toString())
-                .parkingLots(parkingLotDTOs)
+                .parkingLots(
                 .build();
     }
 }

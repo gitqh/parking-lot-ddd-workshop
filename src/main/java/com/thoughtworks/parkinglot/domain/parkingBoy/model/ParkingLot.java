@@ -5,9 +5,14 @@ import static com.google.common.collect.Lists.newArrayList;
 import com.thoughtworks.parkinglot.domain.parkingBoy.exception.IllegalTicketException;
 import com.thoughtworks.parkinglot.domain.parkingBoy.exception.NoEnoughCapacityException;
 import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.Transient;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import javax.persistence.Table;
@@ -18,30 +23,20 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "parking_lot")
 @NoArgsConstructor
+@AllArgsConstructor
 @Getter
 public class ParkingLot {
 
     @Id
-    private Long id;
+    private String parkingLotId;
 
     private ParkingBoyId parkingBoyId;
 
     private int capacity;
 
-    @Transient
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinColumn(name = "number")
     private List<LicensePlate> licensePlates;
-
-    public ParkingLot(int capacity) {
-        this.capacity = capacity;
-        licensePlates = newArrayList();
-    }
-
-    public ParkingLot(int capacity, Long id, ParkingBoyId parkingBoyId, List<LicensePlate> licensePlates) {
-        this.capacity = capacity;
-        this.id = id;
-        this.parkingBoyId = parkingBoyId;
-        this.licensePlates = licensePlates;
-    }
 
     public void park(LicensePlate licensePlate) throws NoEnoughCapacityException {
         if (availableCapacity() < 1) {

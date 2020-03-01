@@ -14,5 +14,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ParkingLotDTO implements Serializable {
-    private Integer capacity;
+    private int capacity;
+    private int availableCapacity;
 }

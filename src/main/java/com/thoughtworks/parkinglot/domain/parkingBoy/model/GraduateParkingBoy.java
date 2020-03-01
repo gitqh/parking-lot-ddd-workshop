@@ -31,14 +31,15 @@ public class GraduateParkingBoy {
             cascade = CascadeType.ALL,
             orphanRemoval = true
     )
-
     @JoinColumn(name = "parking_boy_id")
     private List<ParkingLot> parkingLots;
 
-    public void park(LicensePlate licensePlate) throws NoEnoughCapacityException {
-        parkingLots.stream()
-                .filter(parkingLot -> parkingLot.availableCapacity() > 0)
+    public void park(String number) throws NoEnoughCapacityException {
+        ParkingLot parkingLot = parkingLots.stream()
+                .filter(lot -> lot.availableCapacity() > 0)
                 .findFirst()
                 .orElseThrow(NoEnoughCapacityException::new);
+        LicensePlate lp = new LicensePlate(number, parkingLot.getParkingLotId());
+        parkingLot.park(lp);
     }
 }

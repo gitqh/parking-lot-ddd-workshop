@@ -8,6 +8,7 @@ import com.thoughtworks.parkinglot.domain.parkingBoy.repository.ParkingBoyReposi
 import com.thoughtworks.parkinglot.domain.ticket.model.Ticket;
 import com.thoughtworks.parkinglot.domain.ticket.model.TicketId;
 import com.thoughtworks.parkinglot.domain.ticket.repository.TicketRepository;
+import javax.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -20,23 +21,21 @@ public class ParkingApplicationService {
     private final ParkingBoyRepository parkingBoyRepository;
     private final TicketRepository ticketRepository;
 
-    public void parking(ParkingBoyId parkingBoyId, LicensePlate licensePlate) {
+    @Transactional
+    public Ticket park(ParkingBoyId parkingBoyId, String number) {
         GraduateParkingBoy parkingBoy = parkingBoyRepository.find(parkingBoyId);
 
-        parkingBoy.park(licensePlate);
+        parkingBoy.park(number);
         parkingBoyRepository.save(parkingBoy);
 
         TicketId ticketId = new TicketId(ticketRepository.newTicketId());
-        Ticket ticket = new Ticket(ticketId, licensePlate);
+        Ticket ticket = new Ticket(ticketId, number);
 
         ticketRepository.save(ticket);
+        return ticket;
     }
 
     public GraduateParkingBoy get(ParkingBoyId parkingBoyId) {
         return parkingBoyRepository.find(parkingBoyId);
-    }
-
-    public ParkingBoyDTO find(String parkingBoyId) {
-        return null;
     }
 }
