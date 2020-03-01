@@ -22,7 +22,7 @@ public class ParkingBoyDTOMapper {
         return ParkingBoyDTO.builder()
                 .name(parkingBoy.getName())
                 .parkingBoyId(parkingBoy.getParkingBoyId().toString())
-                .parkingLots(
+                .parkingLots(parkingLotDTOs)
                 .build();
     }
 }
