@@ -8,9 +8,9 @@ import lombok.Getter;
  */
 @Getter
 public abstract class AbstractId implements Serializable {
-    private String id;
+    private String value;
 
     protected AbstractId() {}
 
-    protected AbstractId(String id) { this.id = id; }
+    protected AbstractId(String value) { this.value = value; }
 }

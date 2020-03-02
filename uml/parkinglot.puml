@@ -5,33 +5,55 @@ skinparam class {
     ArrowCollor SeaGreen
 }
 
-class GraduateParkingBoy <<Entity>> {
-    -GraduateParkingBoyId id
-    -List<ParkingLot> parkingLots
-    --
-    +Ticket park(String carId)
+package parkingboy <<Aggregate>> {
+    class ParkingBoy <<Entity>> <<Aggregate Root>>{
+        -GraduateParkingBoyId id
+        -List<String> parkingLotIds
+        --
+        +Ticket park(String carId)
+    }
+
+    interface ParkingStrategy  {
+        Optional<ParkingLot> find(List<ParkingLot> parkingLots)
+    }
+
+    class GeneralParkingStrategy <<Value Object>> {
+        +Optional<ParkingLot> find(List<ParkingLot> parkingLots)
+    }
+
+    ParkingBoy -> ParkingStrategy
+    GeneralParkingStrategy *-- ParkingStrategy
 }
 
-class ParkingLot <<Value Object>> {
-    -Long id
-    -Map<String, String> ticketToCarMap
-    --
-    +Ticket park(String carId)
-    +String pick(String ticketId)
+
+package parkinglot <<Aggregate>> {
+    class ParkingLot <<Entity>> <<Aggregate Root>> {
+        -Long id
+        -Map<String, String> ticketToCarMap
+        --
+        +Ticket park(Car car)
+        +Car pick(TicketId ticketId)
+    }
+
+    class Ticket <<Value Object>> {
+        -String id
+        -String carId
+        -String parkingLotId
+    }
+
+    class LicensePlate <<Value Object>> {
+        -String value
+    }
+
+    class Car <<Value Object>> {
+        -LicensePlate licensePlate
+    }
+
+    ParkingLot "1" o-- "1..*" Ticket
+    Car  -->  LicensePlate
+    ParkingLot "1" -> "1..*" Car
 }
 
-class Ticket <<Value Object>> {
-    -String id
-    -String carId
-    -String parkingLotId
-}
-
-class LicensePlate <<Value Object>> {
-    -String id
-}
-
-ParkingLot "1" o-- "1..*" Ticket
-GraduateParkingBoy "1" o-- "1..*" ParkingLot
-
+ParkingBoy "1" o-- "1..*" ParkingLot
 
 @enduml

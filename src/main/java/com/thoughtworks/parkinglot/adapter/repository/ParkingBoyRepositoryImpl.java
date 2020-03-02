@@ -1,39 +1,34 @@
 package com.thoughtworks.parkinglot.adapter.repository;
 
-import com.thoughtworks.parkinglot.adapter.repository.jpaRepository.LicensePlateJpaRepository;
-import com.thoughtworks.parkinglot.adapter.repository.jpaRepository.ParkingBoyJpaRepository;
-import com.thoughtworks.parkinglot.domain.parkingBoy.model.GraduateParkingBoy;
-import com.thoughtworks.parkinglot.domain.parkingBoy.model.LicensePlate;
-import com.thoughtworks.parkinglot.domain.parkingBoy.model.ParkingBoyId;
-import com.thoughtworks.parkinglot.domain.parkingBoy.repository.ParkingBoyRepository;
+import com.thoughtworks.parkinglot.adapter.repository.memRepository.ParkingBoyMemRepository;
+import com.thoughtworks.parkinglot.domain.model.parkingboy.ParkingBoy;
+import com.thoughtworks.parkinglot.domain.model.parkingboy.ParkingBoyRepository;
+import com.thoughtworks.parkinglot.domain.model.parkinglot.ParkingBoyId;
 import java.util.List;
-import java.util.stream.Collectors;
-import javax.transaction.Transactional;
 import lombok.AllArgsConstructor;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 /**
  * @author gitqh
  */
-@Component
+@Service
 @AllArgsConstructor
 public class ParkingBoyRepositoryImpl implements ParkingBoyRepository {
 
-    private final ParkingBoyJpaRepository parkingBoyJpaRepository;
-    private final LicensePlateJpaRepository licensePlateJpaRepository;
+    private ParkingBoyMemRepository parkingBoyRepository;
 
     @Override
-    public GraduateParkingBoy find(ParkingBoyId parkingBoyId) {
-        return parkingBoyJpaRepository.findById(parkingBoyId).orElse(null);
+    public ParkingBoy find(ParkingBoyId parkingBoyId) {
+        return parkingBoyRepository.find(parkingBoyId);
     }
 
     @Override
-    @Transactional
-    public void save(GraduateParkingBoy graduateParkingBoy) {
-        List<LicensePlate> licensePlates = graduateParkingBoy.getParkingLots().stream()
-                .flatMap(lot -> lot.getLicensePlates().stream())
-                .collect(Collectors.toList());
-        parkingBoyJpaRepository.save(graduateParkingBoy);
-        licensePlateJpaRepository.saveAll(licensePlates);
+    public void save(ParkingBoy parkingBoy) {
+        parkingBoyRepository.save(parkingBoy);
+    }
+
+    @Override
+    public List<ParkingBoy> findAll() {
+        return parkingBoyRepository.findAll();
     }
 }
