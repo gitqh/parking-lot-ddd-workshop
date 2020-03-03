@@ -29,7 +29,7 @@ package parkingboy <<Aggregate>> {
 package parkinglot <<Aggregate>> {
     class ParkingLot <<Entity>> <<Aggregate Root>> {
         -ParkingLotId id
-        -Map<String, String> ticketToCarMap
+        -Map<TicketId, Car> ticketToCarMap
         --
         +Ticket park(Car car)
         +Car pick(TicketId ticketId)

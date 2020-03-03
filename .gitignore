@@ -144,4 +144,4 @@ gradle-app.setting
 .classpath
 .gitattributes
 bin/**
-
+.idea/**

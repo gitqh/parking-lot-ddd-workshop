@@ -39,17 +39,6 @@ public class ParkingLotTest {
         assertThat(car.getLicensePlate()).isEqualTo(carLicensePlate);
     }
 
-    @Test
-    public void should_pick_correct_car_when_parked_several_cars() {
-//        final Ticket ticket1 = parkingLot.park(car1);
-//
-//        final Car car2 = new Car("川A30001");
-//        final Ticket ticket2 = parkingLot.park(car2);
-//
-//        assertThat(parkingLot.pick(ticket1.getId()).getLicensePlate()).isEqualTo(car1.getLicensePlate());
-//        assertThat(parkingLot.pick(ticket2.getId()).getLicensePlate()).isEqualTo(car2.getLicensePlate());
-    }
-
     @Test(expected = NoEnoughCapacityException.class)
     public void should_remind_when_parking_lot_capacity_is_not_enough() {
         final ParkingLot parkingLot = new ParkingLot(parkingLotId, 1);
