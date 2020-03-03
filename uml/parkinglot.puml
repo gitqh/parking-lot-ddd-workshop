@@ -41,16 +41,11 @@ package parkinglot <<Aggregate>> {
         -String parkingLotId
     }
 
-    class LicensePlate <<Value Object>> {
-        -String value
-    }
-
     class Car <<Value Object>> {
-        -LicensePlate licensePlate
+        -String licensePlate
     }
 
     ParkingLot "1" o-- "1..*" Ticket
-    Car  -->  LicensePlate
     ParkingLot "1" -> "1..*" Car
 }
 

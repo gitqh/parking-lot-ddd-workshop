@@ -2,7 +2,7 @@
 # parking-lot-ddd-workshop
 
 ## Class UML Graph
-![avatar](out/uml/parkinglot/parkinglot.png)
+![avatar](uml/parkinglot.png)
 
 
 ## Start Application

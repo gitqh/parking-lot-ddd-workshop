@@ -1,15 +1,16 @@
 package com.thoughtworks.parkinglot.domain.model.parkinglot;
 
 import com.thoughtworks.parkinglot.common.model.AbstractId;
-import java.util.UUID;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 /**
  * @author gitqh
  */
 @Data
 @AllArgsConstructor
+@EqualsAndHashCode(callSuper = false)
 public class ParkingLotId extends AbstractId {
     public ParkingLotId(String id) { super(id); }
 

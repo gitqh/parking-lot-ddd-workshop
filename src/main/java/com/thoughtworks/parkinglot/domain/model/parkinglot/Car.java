@@ -11,5 +11,5 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Getter
 public class Car {
-    private LicensePlate LicensePlate;
+    private String LicensePlate;
 }

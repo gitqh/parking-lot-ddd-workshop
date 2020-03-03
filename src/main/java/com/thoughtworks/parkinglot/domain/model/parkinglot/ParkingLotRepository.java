@@ -7,7 +7,5 @@ import java.util.Optional;
  */
 public interface ParkingLotRepository {
 
-    void save(ParkingLot parkingLot);
-
     Optional<ParkingLot> findById(ParkingLotId parkingLotId);
 }

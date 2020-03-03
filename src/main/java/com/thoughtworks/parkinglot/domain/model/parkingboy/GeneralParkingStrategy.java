@@ -10,9 +10,10 @@ import java.util.Optional;
 public class GeneralParkingStrategy implements ParkingStrategy {
 
     @Override
-    public Optional<ParkingLot> find(List<ParkingLot> parkingLots) {
+    public ParkingLot find(List<ParkingLot> parkingLots) {
         return parkingLots.stream()
                 .filter(lot -> lot.isAvailable())
-                .findFirst();
+                .findFirst()
+                .orElseThrow(RuntimeException::new);
     }
 }

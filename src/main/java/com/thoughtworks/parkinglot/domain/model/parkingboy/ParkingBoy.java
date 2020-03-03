@@ -20,7 +20,7 @@ public class ParkingBoy {
     private GeneralParkingStrategy parkingStrategy;
     private List<ParkingLotId> parkingLotIds;
 
-    public Optional<ParkingLot> find(List<ParkingLot> parkingLots) {
+    public ParkingLot find(List<ParkingLot> parkingLots) {
         return parkingStrategy.find(parkingLots);
     }
 }
