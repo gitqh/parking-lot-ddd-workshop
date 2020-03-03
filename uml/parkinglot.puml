@@ -7,7 +7,7 @@ skinparam class {
 
 package parkingboy <<Aggregate>> {
     class ParkingBoy <<Entity>> <<Aggregate Root>>{
-        -GraduateParkingBoyId id
+        -ParkingBoyId id
         -List<String> parkingLotIds
         --
         +Ticket park(String carId)
@@ -28,15 +28,15 @@ package parkingboy <<Aggregate>> {
 
 package parkinglot <<Aggregate>> {
     class ParkingLot <<Entity>> <<Aggregate Root>> {
-        -Long id
+        -ParkingLotId id
         -Map<String, String> ticketToCarMap
         --
         +Ticket park(Car car)
         +Car pick(TicketId ticketId)
     }
 
-    class Ticket <<Value Object>> {
-        -String id
+    class Ticket <<Entity>> {
+        -TicketId id
         -String carId
         -String parkingLotId
     }

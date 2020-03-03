@@ -141,7 +141,7 @@ gradle-app.setting
 .idea/modules/
 .idea/vcs.xml
 .project
-bin/main/com/thoughtworks/parkinglot/adapter/api/facade/mapper/
-bin/test/
-src/test/resources/
-src/test/test/
+.classpath
+.gitattributes
+bin/**
+

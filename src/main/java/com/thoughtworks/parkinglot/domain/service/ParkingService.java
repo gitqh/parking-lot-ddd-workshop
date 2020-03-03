@@ -26,8 +26,8 @@ public class ParkingService {
                             .collect(Collectors.toList());
                     return boy.find(parkingLots);
                 })
+                .filter(Optional::isPresent)
+                .map(Optional::get)
                 .findFirst();
     }
-
-
 }
