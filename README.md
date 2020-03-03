@@ -12,11 +12,12 @@
 ./gradlew bootRun
 ```
 
+
 ## Basic Data
 
-* Basic Data Class(ParkingBoyMemRepository, ParkingLotMemRepository)
+### Basic Data Class(ParkingBoyMemRepository, ParkingLotMemRepository)
 
-* Basic Data
+### Basic Data
 "BOY001" -> "LOT001"(capacity: 3)
          -> "LOT002"(capacity: 4)
 
@@ -24,7 +25,7 @@
 
 visit [http://localhost:8080/swagger-ui.html](http://localhost:8080/swagger-ui.html)
 
-* parking
+### parking
 POST /parking-lot/parking
 
 Request Body Example:
@@ -43,7 +44,7 @@ Response Example：
 }
 ```
 
-* picking
+### picking
 POST /parking-lot/picking
 
 Request Body Example:
