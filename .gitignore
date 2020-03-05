@@ -144,5 +144,6 @@ gradle-app.setting
 .classpath
 .gitattributes
 bin/**
-.idea/**
+.idea/
 .DS_Store
+.settings/
