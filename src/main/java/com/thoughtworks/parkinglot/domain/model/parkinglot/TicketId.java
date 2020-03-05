@@ -9,7 +9,7 @@ import lombok.EqualsAndHashCode;
  * @author gitqh
  */
 @Data
-@EqualsAndHashCode(callSuper = false)
+@EqualsAndHashCode(callSuper = true)
 public class TicketId  extends AbstractId {
     public TicketId(String value) { super(value); }
 

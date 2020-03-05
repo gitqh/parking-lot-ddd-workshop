@@ -10,7 +10,7 @@ import lombok.EqualsAndHashCode;
  */
 @Data
 @AllArgsConstructor
-@EqualsAndHashCode(callSuper = false)
+@EqualsAndHashCode(callSuper = true)
 public class ParkingLotId extends AbstractId {
     public ParkingLotId(String id) { super(id); }
 

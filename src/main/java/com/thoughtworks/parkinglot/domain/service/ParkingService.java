@@ -6,6 +6,7 @@ import com.thoughtworks.parkinglot.domain.model.parkinglot.ParkingLotRepository;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -19,7 +20,7 @@ public class ParkingService {
     private final ParkingBoyRepository parkingBoyRepository;
 
     public Optional<ParkingLot> find() {
-        return parkingBoyRepository.findAll().stream()
+        return StreamSupport.stream(parkingBoyRepository.findAll().spliterator(), false)
                 .map(boy -> {
                     final List<ParkingLot> parkingLots = boy.getParkingLotIds().stream()
                             .map(id -> parkingLotRepository.findById(id).orElseThrow(RuntimeException::new))

@@ -1,6 +1,7 @@
 package com.thoughtworks.parkinglot.common.model;
 
 import java.io.Serializable;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 
 /**
@@ -8,6 +9,7 @@ import lombok.Getter;
  */
 @Getter
 public abstract class AbstractId implements Serializable {
+    @EqualsAndHashCode.Include
     private String value;
 
     protected AbstractId() {}

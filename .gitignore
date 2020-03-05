@@ -145,3 +145,4 @@ gradle-app.setting
 .gitattributes
 bin/**
 .idea/**
+.DS_Store
