@@ -15,7 +15,7 @@ import org.springframework.stereotype.Service;
  */
 @AllArgsConstructor
 @Service
-public class ParkingService {
+public class ParkingManager {
     private final ParkingLotRepository parkingLotRepository;
     private final ParkingBoyRepository parkingBoyRepository;
 

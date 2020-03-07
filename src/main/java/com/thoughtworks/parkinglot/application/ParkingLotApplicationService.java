@@ -8,7 +8,7 @@ import com.thoughtworks.parkinglot.domain.model.parkinglot.ParkingLotId;
 import com.thoughtworks.parkinglot.domain.model.parkinglot.ParkingLotRepository;
 import com.thoughtworks.parkinglot.domain.model.parkinglot.Ticket;
 import com.thoughtworks.parkinglot.domain.model.parkinglot.TicketId;
-import com.thoughtworks.parkinglot.domain.service.ParkingService;
+import com.thoughtworks.parkinglot.domain.service.ParkingManager;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -18,12 +18,12 @@ import org.springframework.stereotype.Service;
 @Service
 @AllArgsConstructor
 public class ParkingLotApplicationService {
-    private final ParkingService parkingService;
+    private final ParkingManager parkingManager;
     private final ParkingLotRepository parkingLotRepository;
 
     public Ticket park(String licensePlate) {
-        final Car car = new Car(licensePlate);
-        final ParkingLot parkingLot = parkingService.find().orElseThrow(NoEnoughCapacityException::new);
+        final Car car = Car.of(licensePlate);
+        final ParkingLot parkingLot = parkingManager.find().orElseThrow(NoEnoughCapacityException::new);
         final Ticket ticket = parkingLot.park(car);
         return ticket;
     }

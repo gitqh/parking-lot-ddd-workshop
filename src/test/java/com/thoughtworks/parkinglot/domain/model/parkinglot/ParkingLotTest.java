@@ -18,12 +18,12 @@ public class ParkingLotTest {
         parkingLotId = new ParkingLotId("LOT001");
         parkingLot = new ParkingLot(parkingLotId, 5);
         carLicensePlate = "川A32678";
-        car1 = new Car(carLicensePlate);
+        car1 = Car.of(carLicensePlate);
     }
 
     @Test
     public void should_return_ticket_with_correct_info() {
-        Ticket ticket = parkingLot.park(new Car(carLicensePlate));
+        Ticket ticket = parkingLot.park(Car.of(carLicensePlate));
 
         assertThat(ticket.getId()).isNotNull();
         assertThat(ticket.getParkingLotId()).isEqualTo(parkingLotId);
@@ -43,7 +43,7 @@ public class ParkingLotTest {
     public void should_remind_when_parking_lot_capacity_is_not_enough() {
         final ParkingLot parkingLot = new ParkingLot(parkingLotId, 1);
         parkingLot.park(car1);
-        parkingLot.park(new Car("川A30001"));
+        parkingLot.park(Car.of("川A30001"));
     }
 
     @Test(expected = IllegalTicketException.class)

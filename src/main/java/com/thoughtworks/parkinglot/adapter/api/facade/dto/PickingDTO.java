@@ -1,12 +1,12 @@
 package com.thoughtworks.parkinglot.adapter.api.facade.dto;
 
 import java.io.Serializable;
-import lombok.Data;
+import lombok.Value;
 
 /**
  * @author gitqh
  */
-@Data
+@Value
 public class PickingDTO implements Serializable {
     private String ticketId;
     private String parkingLotId;

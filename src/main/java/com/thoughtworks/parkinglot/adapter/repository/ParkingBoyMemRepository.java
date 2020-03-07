@@ -1,12 +1,13 @@
 package com.thoughtworks.parkinglot.adapter.repository;
 
 import com.google.common.collect.ImmutableList;
-import com.thoughtworks.parkinglot.domain.model.parkingboy.GeneralParkingStrategy;
 import com.thoughtworks.parkinglot.domain.model.parkingboy.ParkingBoy;
+import com.thoughtworks.parkinglot.domain.model.parkingboy.ParkingBoyFactory;
 import com.thoughtworks.parkinglot.domain.model.parkingboy.ParkingBoyRepository;
-import com.thoughtworks.parkinglot.domain.model.parkinglot.ParkingBoyId;
+import com.thoughtworks.parkinglot.domain.model.parkingboy.ParkingStrategyEnum;
 import com.thoughtworks.parkinglot.domain.model.parkinglot.ParkingLotId;
 import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -15,10 +16,17 @@ import org.springframework.stereotype.Repository;
 @Repository
 public class ParkingBoyMemRepository implements ParkingBoyRepository {
 
-    private List<ParkingBoy> parkingBoys = ImmutableList.of(
-            new ParkingBoy(new ParkingBoyId("BOY001"), new GeneralParkingStrategy(),
-                    ImmutableList.of(new ParkingLotId("LOT001"), new ParkingLotId("LOT002")))
-    );
+    private List<ParkingBoy> parkingBoys;
+
+    @Autowired
+    private ParkingBoyFactory parkingBoyFactory;
+
+    {
+        List<ParkingLotId> parkingLotIds = ImmutableList.of(new ParkingLotId("LOT001"), new ParkingLotId("LOT002"));
+        parkingBoys = ImmutableList.of(
+                parkingBoyFactory.createParkingBoy(parkingLotIds, ParkingStrategyEnum.MAX_SPACE)
+        );
+    }
 
     @Override
     public List<ParkingBoy> findAll() {

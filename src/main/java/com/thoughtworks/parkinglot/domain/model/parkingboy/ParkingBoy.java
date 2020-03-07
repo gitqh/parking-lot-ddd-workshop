@@ -7,18 +7,16 @@ import java.util.List;
 import java.util.Optional;
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 /**
  * @author gitqh
  */
-@NoArgsConstructor
-@AllArgsConstructor
 @Data
+@AllArgsConstructor(staticName="of")
 public class ParkingBoy {
     private ParkingBoyId parkingBoyId;
-    private GeneralParkingStrategy parkingStrategy;
     private List<ParkingLotId> parkingLotIds;
+    private ParkingStrategy parkingStrategy;
 
     public Optional<ParkingLot> find(List<ParkingLot> parkingLots) {
         return parkingStrategy.find(parkingLots);

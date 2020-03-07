@@ -5,10 +5,19 @@ skinparam class {
     ArrowCollor SeaGreen
 }
 
+package service <<Domain Service>> {
+    class ParkingManager {
+        -ParkingLotRepository parkingLotRepository
+        -ParkingBoyRepository parkingBoyRepositoy
+        +Optional<ParkingLot> find
+    }
+}
+
 package parkingboy <<Aggregate>> {
     class ParkingBoy <<Entity>> <<Aggregate Root>>{
         -ParkingBoyId id
         -List<String> parkingLotIds
+        -ParkingStrategy ParkingStrategy
         --
         +Ticket park(String carId)
     }
@@ -21,8 +30,18 @@ package parkingboy <<Aggregate>> {
         +Optional<ParkingLot> find(List<ParkingLot> parkingLots)
     }
 
-    ParkingBoy -> ParkingStrategy
-    GeneralParkingStrategy *-- ParkingStrategy
+    class MaxSpaceParkingStrategy <<Value Object>> {
+        +Optional<ParkingLot> find(List<ParkingLot> parkingLots)
+    }
+
+    interface ParkingBoyRepository {
+        +List<ParkingBoy> findAll()
+    }
+
+    ParkingBoy o-> ParkingStrategy
+    GeneralParkingStrategy ..|> ParkingStrategy
+    MaxSpaceParkingStrategy ..|> ParkingStrategy
+    ParkingManager o--> ParkingBoyRepository
 }
 
 
@@ -45,8 +64,13 @@ package parkinglot <<Aggregate>> {
         -String licensePlate
     }
 
+    interface ParkingLotRepository {
+        +Optional<ParkingLot> findById(ParkingLotId parkingLotId)
+    }
+
     ParkingLot "1" o-- "1..*" Ticket
     ParkingLot "1" -> "1..*" Car
+    ParkingManager o--> ParkingLotRepository
 }
 
 ParkingBoy "1" o-- "1..*" ParkingLot

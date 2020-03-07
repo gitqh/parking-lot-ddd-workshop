@@ -19,7 +19,7 @@ public class GeneralParkingStrategyTest {
     public void setUp() {
         parkingLot1 = mock(ParkingLot.class);
         parkingLot2 = mock(ParkingLot.class);
-        parkingStrategy = new GeneralParkingStrategy();
+        parkingStrategy = GeneralParkingStrategy.of();
     }
 
     @Test

@@ -4,14 +4,14 @@ import com.google.common.collect.Maps;
 import com.thoughtworks.parkinglot.domain.exception.IllegalTicketException;
 import com.thoughtworks.parkinglot.domain.exception.NoEnoughCapacityException;
 import java.util.Map;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.AllArgsConstructor;
+import lombok.Data;
 
 /**
  * @author gitqh
  */
-@NoArgsConstructor
-@Getter
+@Data
+@AllArgsConstructor(staticName="of")
 public class ParkingLot {
     private ParkingLotId id;
 
@@ -44,5 +44,9 @@ public class ParkingLot {
 
     public boolean isAvailable() {
         return capacity > ticketToCar.size();
+    }
+
+    public int getSpace() {
+        return capacity - ticketToCar.size();
     }
 }

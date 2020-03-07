@@ -1,15 +1,11 @@
 package com.thoughtworks.parkinglot.domain.model.parkinglot;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.Value;
 
 /**
  * @author gitqh
  */
-@AllArgsConstructor
-@NoArgsConstructor
-@Getter
+@Value(staticConstructor = "of")
 public class Car {
     private String LicensePlate;
 }

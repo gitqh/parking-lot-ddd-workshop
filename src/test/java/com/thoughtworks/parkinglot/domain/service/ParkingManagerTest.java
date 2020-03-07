@@ -20,7 +20,7 @@ import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
 @RunWith(MockitoJUnitRunner.class)
-public class ParkingServiceTest {
+public class ParkingManagerTest {
     @Mock
     private ParkingLotRepository parkingLotRepository;
     @Mock
@@ -44,9 +44,9 @@ public class ParkingServiceTest {
         given(boy1.getParkingLotIds()).willReturn(singletonList(parkingLotId));
         given(parkingLotRepository.findById(parkingLotId)).willReturn(Optional.of(parkingLot));
         given(boy1.find(ImmutableList.of(parkingLot))).willReturn(Optional.of(parkingLot));
-        final ParkingService parkingService = new ParkingService(parkingLotRepository, parkingBoyRepository);
+        final ParkingManager parkingManager = new ParkingManager(parkingLotRepository, parkingBoyRepository);
 
-        final Optional<ParkingLot> result = parkingService.find();
+        final Optional<ParkingLot> result = parkingManager.find();
 
         assertThat(result).containsSame(parkingLot);
     }
@@ -60,9 +60,9 @@ public class ParkingServiceTest {
         given(parkingLotRepository.findById(parkingLotId)).willReturn(Optional.of(parkingLot));
         given(boy2.find(ImmutableList.of(parkingLot))).willReturn(Optional.of(parkingLot));
 
-        final ParkingService parkingService = new ParkingService(parkingLotRepository, parkingBoyRepository);
+        final ParkingManager parkingManager = new ParkingManager(parkingLotRepository, parkingBoyRepository);
 
-        final Optional<ParkingLot> result = parkingService.find();
+        final Optional<ParkingLot> result = parkingManager.find();
 
         assertThat(result).containsSame(parkingLot);
     }

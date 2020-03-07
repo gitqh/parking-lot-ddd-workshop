@@ -12,7 +12,7 @@ import com.thoughtworks.parkinglot.domain.model.parkinglot.ParkingLotId;
 import com.thoughtworks.parkinglot.domain.model.parkinglot.ParkingLotRepository;
 import com.thoughtworks.parkinglot.domain.model.parkinglot.Ticket;
 import com.thoughtworks.parkinglot.domain.model.parkinglot.TicketId;
-import com.thoughtworks.parkinglot.domain.service.ParkingService;
+import com.thoughtworks.parkinglot.domain.service.ParkingManager;
 import java.util.Optional;
 import org.junit.Before;
 import org.junit.Test;
@@ -27,7 +27,7 @@ public class ParkingLotApplicationServiceTest {
     @Mock
     private ParkingLot parkingLot;
     @Mock
-    private ParkingService parkingService;
+    private ParkingManager parkingManager;
 
     private ParkingLotId parkingLotId;
 
@@ -39,11 +39,11 @@ public class ParkingLotApplicationServiceTest {
     @Test
     public void should_return_ticket() {
         final Ticket expectedTicket = mock(Ticket.class);
-        given(parkingService.find()).willReturn(Optional.of(parkingLot));
+        given(parkingManager.find()).willReturn(Optional.of(parkingLot));
         given(parkingLot.park(any())).willReturn(expectedTicket);
 
         ParkingLotApplicationService parkingLotApplicationService =
-                new ParkingLotApplicationService(parkingService, parkingLotRepository);
+                new ParkingLotApplicationService(parkingManager, parkingLotRepository);
         final Ticket ticket = parkingLotApplicationService.park("川A45678");
 
         assertThat(ticket).isEqualTo(expectedTicket);
@@ -54,13 +54,13 @@ public class ParkingLotApplicationServiceTest {
         String carLicensePlate = "川A45678";
         TicketId ticketId = TicketId.newTicketId();
         final Ticket ticket = new Ticket(ticketId, carLicensePlate, parkingLotId);
-        final Car expectedCar = new Car(carLicensePlate);
+        final Car expectedCar = Car.of(carLicensePlate);
         final ParkingLot parkingLot = mock(ParkingLot.class);
         given(parkingLot.pick(ticket.getId())).willReturn(expectedCar);
         given(parkingLotRepository.findById(parkingLotId)).willReturn(Optional.of(parkingLot));
 
         ParkingLotApplicationService parkingLotApplicationService =
-                new ParkingLotApplicationService(parkingService, parkingLotRepository);
+                new ParkingLotApplicationService(parkingManager, parkingLotRepository);
         final Car car = parkingLotApplicationService.pick(ticketId, parkingLotId);
 
         assertThat(car).isEqualTo(expectedCar);
@@ -71,7 +71,7 @@ public class ParkingLotApplicationServiceTest {
         TicketId ticketId = new TicketId("invalid-ticket-id");
 
         ParkingLotApplicationService parkingLotApplicationService =
-                new ParkingLotApplicationService(parkingService, parkingLotRepository);
+                new ParkingLotApplicationService(parkingManager, parkingLotRepository);
 
         parkingLotApplicationService.pick(ticketId, parkingLotId);
     }

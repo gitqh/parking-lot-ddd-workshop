@@ -11,6 +11,6 @@ import org.springframework.stereotype.Component;
 public class CarMapper {
 
     public CarResponse to(Car car) {
-        return CarResponse.builder().carLicensePlate(car.getLicensePlate()).build();
+        return CarResponse.of(car.getLicensePlate());
     }
 }
