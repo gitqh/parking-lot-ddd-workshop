@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class CarMapper {
 
-    public CarResponse to(Car car) {
+    public CarResponse to(final Car car) {
         return CarResponse.of(car.getLicensePlate());
     }
 }

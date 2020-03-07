@@ -7,5 +7,5 @@ import lombok.Value;
  */
 @Value(staticConstructor = "of")
 public class Car {
-    private String LicensePlate;
+    private String licensePlate;
 }

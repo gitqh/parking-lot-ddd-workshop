@@ -21,14 +21,14 @@ public class ParkingLotApplicationService {
     private final ParkingManager parkingManager;
     private final ParkingLotRepository parkingLotRepository;
 
-    public Ticket park(String licensePlate) {
+    public Ticket park(final String licensePlate) {
         final Car car = Car.of(licensePlate);
         final ParkingLot parkingLot = parkingManager.find().orElseThrow(NoEnoughCapacityException::new);
         final Ticket ticket = parkingLot.park(car);
         return ticket;
     }
 
-    public Car pick(TicketId ticketId, ParkingLotId parkingLotId) {
+    public Car pick(final TicketId ticketId, final ParkingLotId parkingLotId) {
         final ParkingLot parkingLot = parkingLotRepository.findById(parkingLotId)
                 .orElseThrow(IllegalTicketException::new);
         final Car car = parkingLot.pick(ticketId);

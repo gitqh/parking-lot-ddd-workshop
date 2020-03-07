@@ -12,13 +12,13 @@ import lombok.Data;
  * @author gitqh
  */
 @Data
-@AllArgsConstructor(staticName="of")
+@AllArgsConstructor(staticName = "of")
 public class ParkingBoy {
     private ParkingBoyId parkingBoyId;
     private List<ParkingLotId> parkingLotIds;
     private ParkingStrategy parkingStrategy;
 
-    public Optional<ParkingLot> find(List<ParkingLot> parkingLots) {
+    public Optional<ParkingLot> find(final List<ParkingLot> parkingLots) {
         return parkingStrategy.find(parkingLots);
     }
 }

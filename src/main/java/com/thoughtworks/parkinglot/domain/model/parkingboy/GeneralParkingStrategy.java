@@ -12,7 +12,7 @@ import lombok.Value;
 public class GeneralParkingStrategy implements ParkingStrategy {
 
     @Override
-    public Optional<ParkingLot> find(List<ParkingLot> parkingLots) {
+    public Optional<ParkingLot> find(final List<ParkingLot> parkingLots) {
         return parkingLots.stream()
                 .filter(ParkingLot::isAvailable)
                 .findFirst();

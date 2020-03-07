@@ -22,11 +22,11 @@ public class ParkingLotServiceFacade {
     private final CarMapper carMapper;
     private final TicketMapper ticketMapper;
 
-    public TicketResponse park(ParkingDTO parkingDTO) {
+    public TicketResponse park(final ParkingDTO parkingDTO) {
         return ticketMapper.to(parkingLotApplicationService.park(parkingDTO.getLicensePlate()));
     }
 
-    public CarResponse pick(PickingDTO pickingDTO) {
+    public CarResponse pick(final PickingDTO pickingDTO) {
         return carMapper.to(parkingLotApplicationService.pick(new TicketId(pickingDTO.getTicketId()),
                 new ParkingLotId(pickingDTO.getParkingLotId())));
     }

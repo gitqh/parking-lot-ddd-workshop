@@ -12,7 +12,11 @@ public abstract class AbstractId implements Serializable {
     @EqualsAndHashCode.Include
     private String value;
 
-    protected AbstractId() {}
+    protected AbstractId() {
 
-    protected AbstractId(String value) { this.value = value; }
+    }
+
+    protected AbstractId(final String value) {
+        this.value = value;
+    }
 }

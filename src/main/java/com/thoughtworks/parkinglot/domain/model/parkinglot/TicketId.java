@@ -11,9 +11,13 @@ import lombok.EqualsAndHashCode;
 @Data
 @EqualsAndHashCode(callSuper = true)
 public class TicketId  extends AbstractId {
-    public TicketId(String value) { super(value); }
+    public TicketId(final String value) {
+        super(value);
+    }
 
-    public static TicketId ticketId(String id) { return new TicketId(id); }
+    public static TicketId ticketId(final String id) {
+        return new TicketId(id);
+    }
 
     public static TicketId newTicketId() {
         return ticketId(UUID.randomUUID().toString().replace("-", ""));

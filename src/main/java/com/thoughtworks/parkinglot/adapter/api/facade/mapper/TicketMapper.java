@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class TicketMapper {
 
-    public TicketResponse to(Ticket ticket) {
+    public TicketResponse to(final Ticket ticket) {
         return TicketResponse.of(ticket.getLicensePlate(),
             ticket.getParkingLotId().getValue(), ticket.getId().getValue());
     }

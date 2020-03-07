@@ -12,8 +12,8 @@ import lombok.EqualsAndHashCode;
 @AllArgsConstructor
 @EqualsAndHashCode(callSuper = true)
 public class ParkingLotId extends AbstractId {
-    public ParkingLotId(String id) { super(id); }
-
-    public static ParkingLotId parkingLotId(String id) { return new ParkingLotId(id); }
+    public ParkingLotId(final String id) {
+        super(id);
+    }
 
 }

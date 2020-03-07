@@ -14,13 +14,17 @@ import org.springframework.stereotype.Repository;
 @Repository
 public class ParkingLotMemRepository implements ParkingLotRepository {
 
+    private static final  int CAPACITY_OF_LOT001 = 3;
+
+    private static final  int CAPACITY_OF_LOT002 = 4;
+
     private List<ParkingLot> parkingLotLists = ImmutableList.of(
-            new ParkingLot(new ParkingLotId("LOT001"), 3),
-            new ParkingLot(new ParkingLotId("LOT002"), 4)
+            new ParkingLot(new ParkingLotId("LOT001"), CAPACITY_OF_LOT001),
+            new ParkingLot(new ParkingLotId("LOT002"), CAPACITY_OF_LOT002)
     );
 
     @Override
-    public Optional<ParkingLot> findById(ParkingLotId parkingLotId) {
+    public Optional<ParkingLot> findById(final ParkingLotId parkingLotId) {
         return parkingLotLists.stream()
                 .filter(lot -> lot.getId().getValue().equals(parkingLotId.getValue()))
                 .findFirst();

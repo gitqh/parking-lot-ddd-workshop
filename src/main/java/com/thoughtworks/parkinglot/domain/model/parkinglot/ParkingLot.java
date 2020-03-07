@@ -11,7 +11,7 @@ import lombok.Data;
  * @author gitqh
  */
 @Data
-@AllArgsConstructor(staticName="of")
+@AllArgsConstructor(staticName = "of")
 public class ParkingLot {
     private ParkingLotId id;
 
@@ -19,12 +19,12 @@ public class ParkingLot {
 
     private Map<TicketId, Car> ticketToCar = Maps.newHashMap();
 
-    public ParkingLot(ParkingLotId id, int capacity) {
+    public ParkingLot(final ParkingLotId id, final int capacity) {
         this.id = id;
         this.capacity = capacity;
     }
 
-    public Ticket park(Car car) {
+    public Ticket park(final Car car) {
         if (!isAvailable()) {
             throw new NoEnoughCapacityException();
         }
@@ -33,7 +33,7 @@ public class ParkingLot {
         return ticket;
     }
 
-    public Car pick(TicketId ticketId) {
+    public Car pick(final TicketId ticketId) {
         final Car car = ticketToCar.get(ticketId);
         if (car == null) {
             throw new IllegalTicketException();

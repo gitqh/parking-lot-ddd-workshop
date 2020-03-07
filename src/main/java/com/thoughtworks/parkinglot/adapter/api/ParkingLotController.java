@@ -30,14 +30,14 @@ public class ParkingLotController {
     @PostMapping("/parking")
     @ApiOperation("park a car")
     @ResponseStatus(CREATED)
-    public TicketResponse park(@RequestBody ParkingDTO parkingDTO) {
+    public TicketResponse park(@RequestBody final ParkingDTO parkingDTO) {
         return parkingLotServiceFacade.park(parkingDTO);
     }
 
     @PostMapping("/picking")
     @ApiOperation("pick a car")
     @ResponseStatus(CREATED)
-    public CarResponse pick(@RequestBody PickingDTO pickingDTO) {
+    public CarResponse pick(@RequestBody final PickingDTO pickingDTO) {
         return parkingLotServiceFacade.pick(pickingDTO);
     }
 }
