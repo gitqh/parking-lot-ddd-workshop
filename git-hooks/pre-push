@@ -4,7 +4,6 @@ set -e
 stashResult=$(git stash)
 ./gradlew clean build
 buildResult=$?
-echo "result: $buildResult"
 
 if [ "$stashResult"x != "No local changes to save"x ];
     then
