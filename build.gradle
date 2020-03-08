@@ -43,7 +43,7 @@ sourceCompatibility = JavaVersion.VERSION_1_8
 ext {
     springBootVersion = "2.2.5.RELEASE"
     mapstructVersion = "1.3.0.Final"
-    lombokVersion = "1.18.6"
+    lombokVersion = "1.18.12"
     springfoxVersion = "2.9.2"
     assertJVersion = '3.11.1'
     mockitoVersion = '2.25.1'
@@ -83,4 +83,33 @@ apply from: "$rootDir/gradle/config/scripts/sonar-dependency.gradle"
 
 application {
     mainClassName = "com.thoughtworks.parkinglot.Application"
+}
+
+coverage {
+    excludePackages = [
+            "**/dto/**",
+            "**/response/**",
+            "**/mapper/**",
+            "**/repository/**",
+            "**/common/**",
+            "**/config/**",
+            "**/exception/**",
+            "**/api/**",
+            "**/model/parkingboy/ParkingStrategyEnum.java",
+            "**/model/parkingboy/ParkingFactory.java",
+            "**/Application.java"
+    ]
+    excludeClasses = [
+            "**/dto/**",
+            "**/response/**",
+            "**/mapper/**",
+            "**/repository/**",
+            "**/common/**",
+            "**/config/**",
+            "**/exception/**",
+            "**/api/**",
+            "**/model/parkingboy/ParkingStrategyEnum.java",
+            "**/model/parkingboy/ParkingFactory.java",
+            "**/Application.java"
+    ]
 }

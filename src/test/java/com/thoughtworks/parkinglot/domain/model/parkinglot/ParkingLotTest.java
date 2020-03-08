@@ -28,6 +28,7 @@ public class ParkingLotTest {
         assertThat(ticket.getId()).isNotNull();
         assertThat(ticket.getParkingLotId()).isEqualTo(parkingLotId);
         assertThat(ticket.getLicensePlate()).isEqualTo(carLicensePlate);
+        assertThat(parkingLot.getSpace()).isEqualTo(4);
     }
 
     @Test
@@ -37,6 +38,7 @@ public class ParkingLotTest {
         final Car car = parkingLot.pick(ticket.getId());
 
         assertThat(car.getLicensePlate()).isEqualTo(carLicensePlate);
+		assertThat(parkingLot.getSpace()).isEqualTo(5);
     }
 
     @Test(expected = NoEnoughCapacityException.class)
@@ -44,6 +46,7 @@ public class ParkingLotTest {
         final ParkingLot parkingLot = new ParkingLot(parkingLotId, 1);
         parkingLot.park(car1);
         parkingLot.park(Car.of("川A30001"));
+		assertThat(parkingLot.getSpace()).isEqualTo(0);
     }
 
     @Test(expected = IllegalTicketException.class)
@@ -58,4 +61,5 @@ public class ParkingLotTest {
         parkingLot.pick(ticket.getId());
         parkingLot.pick(ticket.getId());
     }
+
 }
