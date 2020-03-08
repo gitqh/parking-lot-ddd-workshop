@@ -1,16 +1,19 @@
 #!/bin/sh
-stash = `git stash`
-./gradlew clean build
-CMD=$
+set -e
 
-if [ "$stash"x != "No local changes to save"x ];
+stashResult=$(git stash)
+./gradlew clean build
+buildResult=$?
+echo "result: $buildResult"
+
+if [ "$stashResult"x != "No local changes to save"x ];
     then
       git stash pop
     else
       echo "No stash, needn't stash pop"
 fi
 
-if [ $CMD -eq 0 ];
+if [ $buildResult -eq 0 ];
   then
     echo "Build successful, continue commit"
     exit 0
