@@ -9,7 +9,7 @@ import lombok.Value;
  * @author gitqh
  */
 @Value(staticConstructor = "of")
-public class GeneralParkingStrategy implements ParkingStrategy {
+public class NaturalParkingStrategy implements ParkingStrategy {
 
     @Override
     public Optional<ParkingLot> find(final List<ParkingLot> parkingLots) {

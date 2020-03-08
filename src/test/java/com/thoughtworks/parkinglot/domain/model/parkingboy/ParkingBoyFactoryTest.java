@@ -25,7 +25,7 @@ public class ParkingBoyFactoryTest {
 	public void should_return_boy_with_general_parking_strategy() {
 		final ParkingBoy parkingBoy = parkingBoyFactory.createParkingBoy(parkingLotIds,
 				ParkingStrategyEnum.GENERAL);
-		final ParkingStrategy expectedStrategy = GeneralParkingStrategy.of();
+		final ParkingStrategy expectedStrategy = NaturalParkingStrategy.of();
 
 		assertThat(expectedStrategy).isEqualTo(parkingBoy.getParkingStrategy());
 	}
@@ -34,7 +34,7 @@ public class ParkingBoyFactoryTest {
 	public void should_return_boy_with_max_space_parking_strategy() {
 		final ParkingBoy parkingBoy = parkingBoyFactory.createParkingBoy(parkingLotIds,
 				ParkingStrategyEnum.MAX_SPACE);
-		final ParkingStrategy expectedStrategy = MaxSpaceParkingStrategy.of();
+		final ParkingStrategy expectedStrategy = MaxSpaceFirstParkingStrategy.of();
 
 		assertThat(expectedStrategy).isEqualTo(parkingBoy.getParkingStrategy());
 	}

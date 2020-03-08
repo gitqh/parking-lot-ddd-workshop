@@ -15,10 +15,10 @@ public class ParkingBoyFactory {
         switch (parkingStrategyEnum) {
             case MAX_SPACE:
                 return ParkingBoy.of(ParkingBoyId.newParkingBoyId(), parkingLotIds,
-                        MaxSpaceParkingStrategy.of());
+                        MaxSpaceFirstParkingStrategy.of());
             default:
                 return ParkingBoy.of(ParkingBoyId.newParkingBoyId(), parkingLotIds,
-                        GeneralParkingStrategy.of());
+                        NaturalParkingStrategy.of());
         }
     }
 

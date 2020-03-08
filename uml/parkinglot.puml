@@ -26,7 +26,7 @@ package parkingboy <<Aggregate>> {
         Optional<ParkingLot> find(List<ParkingLot> parkingLots)
     }
 
-    class GeneralParkingStrategy <<Value Object>> {
+    class NaturalParkingStrategy <<Value Object>> {
         +Optional<ParkingLot> find(List<ParkingLot> parkingLots)
     }
 
@@ -39,7 +39,7 @@ package parkingboy <<Aggregate>> {
     }
 
     ParkingBoy o-> ParkingStrategy
-    GeneralParkingStrategy ..|> ParkingStrategy
+    NaturalParkingStrategy ..|> ParkingStrategy
     MaxSpaceParkingStrategy ..|> ParkingStrategy
     ParkingManager o--> ParkingBoyRepository
 }
@@ -56,7 +56,7 @@ package parkinglot <<Aggregate>> {
 
     class Ticket <<Entity>> {
         -TicketId id
-        -String carId
+        -String licensePlate
         -String parkingLotId
     }
 

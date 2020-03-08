@@ -10,7 +10,7 @@ import java.util.Optional;
 import org.junit.Before;
 import org.junit.Test;
 
-public class MaxSpaceParkingStrategyTest {
+public class NaturalParkingStrategyTest {
     private ParkingStrategy parkingStrategy;
     private ParkingLot parkingLot1;
     private ParkingLot parkingLot2;
@@ -19,31 +19,28 @@ public class MaxSpaceParkingStrategyTest {
     public void setUp() {
         parkingLot1 = mock(ParkingLot.class);
         parkingLot2 = mock(ParkingLot.class);
-        parkingStrategy = MaxSpaceParkingStrategy.of();
+        parkingStrategy = NaturalParkingStrategy.of();
     }
 
     @Test
-    public void should_return_2nd_when_2nd_has_most_space() {
+    public void should_return_1st_parking_lot_when_1st_is_available() {
         given(parkingLot1.isAvailable()).willReturn(true);
-        given(parkingLot1.getSpace()).willReturn(3);
-        given(parkingLot2.isAvailable()).willReturn(true);
-        given(parkingLot2.getSpace()).willReturn(5);
-
-        Optional<ParkingLot> expectedParkingLot = parkingStrategy.find(ImmutableList.of(
-                parkingLot1, parkingLot2));
-
-        assertThat(expectedParkingLot).containsSame(parkingLot2);
-    }
-
-    @Test
-    public void should_return_1st_parking_lot_when_2nd_is_not_available() {
-        given(parkingLot1.isAvailable()).willReturn(true);
-        given(parkingLot2.isAvailable()).willReturn(false);
 
         final Optional<ParkingLot> expectedParkingLot = parkingStrategy.find(
                 ImmutableList.of(parkingLot1, parkingLot2));
 
         assertThat(expectedParkingLot).containsSame(parkingLot1);
+    }
+
+    @Test
+    public void should_return_2nd_parking_lot_when_1st_is_not_available() {
+        given(parkingLot1.isAvailable()).willReturn(false);
+        given(parkingLot2.isAvailable()).willReturn(true);
+
+        final Optional<ParkingLot> expectedParkingLot = parkingStrategy.find(
+                ImmutableList.of(parkingLot1, parkingLot2));
+
+        assertThat(expectedParkingLot).containsSame(parkingLot2);
     }
 
     @Test
