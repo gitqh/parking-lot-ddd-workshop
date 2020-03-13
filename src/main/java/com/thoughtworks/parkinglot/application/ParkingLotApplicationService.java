@@ -7,7 +7,6 @@ import com.thoughtworks.parkinglot.domain.model.parkinglot.ParkingLot;
 import com.thoughtworks.parkinglot.domain.model.parkinglot.ParkingLotId;
 import com.thoughtworks.parkinglot.domain.model.parkinglot.ParkingLotRepository;
 import com.thoughtworks.parkinglot.domain.model.parkinglot.Ticket;
-import com.thoughtworks.parkinglot.domain.model.parkinglot.TicketId;
 import com.thoughtworks.parkinglot.domain.service.ParkingManager;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -28,10 +27,10 @@ public class ParkingLotApplicationService {
         return ticket;
     }
 
-    public Car pick(final TicketId ticketId, final ParkingLotId parkingLotId) {
+    public Car pick(final String licensePlate, final ParkingLotId parkingLotId) {
         final ParkingLot parkingLot = parkingLotRepository.findById(parkingLotId)
                 .orElseThrow(IllegalTicketException::new);
-        final Car car = parkingLot.pick(ticketId);
+        final Car car = parkingLot.pick(licensePlate);
         return car;
     }
 }

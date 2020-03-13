@@ -17,7 +17,7 @@ public class ParkingLot {
 
     private int capacity;
 
-    private Map<TicketId, Car> ticketToCar = Maps.newHashMap();
+    private Map<String, Car> ticketToCar = Maps.newHashMap();
 
     public ParkingLot(final ParkingLotId id, final int capacity) {
         this.id = id;
@@ -28,17 +28,17 @@ public class ParkingLot {
         if (!isAvailable()) {
             throw new NoEnoughCapacityException();
         }
-        final Ticket ticket = new Ticket(TicketId.newTicketId(), car.getLicensePlate(), id);
-        ticketToCar.put(ticket.getId(), car);
+        final Ticket ticket = new Ticket(car.getLicensePlate(), id);
+        ticketToCar.put(car.getLicensePlate(), car);
         return ticket;
     }
 
-    public Car pick(final TicketId ticketId) {
-        final Car car = ticketToCar.get(ticketId);
+    public Car pick(final String licensePlate) {
+        final Car car = ticketToCar.get(licensePlate);
         if (car == null) {
             throw new IllegalTicketException();
         }
-        ticketToCar.remove(ticketId);
+        ticketToCar.remove(licensePlate);
         return car;
     }
 

@@ -8,5 +8,5 @@ import lombok.Value;
  */
 @Value
 public class ParkingDTO implements Serializable {
-    private String licensePlate;
+    private final String licensePlate;
 }

@@ -12,7 +12,7 @@ public class TicketMapper {
 
     public TicketResponse to(final Ticket ticket) {
         return TicketResponse.of(ticket.getLicensePlate(),
-            ticket.getParkingLotId().getValue(), ticket.getId().getValue());
+            ticket.getParkingLotId().getValue());
     }
 
 }

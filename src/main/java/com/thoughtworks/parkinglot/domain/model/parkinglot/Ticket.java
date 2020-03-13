@@ -9,8 +9,6 @@ import lombok.Getter;
 @AllArgsConstructor
 @Getter
 public class Ticket {
-    private final TicketId id;
     private final String licensePlate;
     private final ParkingLotId parkingLotId;
-
 }

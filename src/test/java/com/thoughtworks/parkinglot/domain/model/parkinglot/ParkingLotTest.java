@@ -25,7 +25,6 @@ public class ParkingLotTest {
     public void should_return_ticket_with_correct_info() {
         Ticket ticket = parkingLot.park(Car.of(carLicensePlate));
 
-        assertThat(ticket.getId()).isNotNull();
         assertThat(ticket.getParkingLotId()).isEqualTo(parkingLotId);
         assertThat(ticket.getLicensePlate()).isEqualTo(carLicensePlate);
         assertThat(parkingLot.getSpace()).isEqualTo(4);
@@ -35,7 +34,7 @@ public class ParkingLotTest {
     public void should_return_ticket_when_park_car() {
         final Ticket ticket = parkingLot.park(car1);
 
-        final Car car = parkingLot.pick(ticket.getId());
+        final Car car = parkingLot.pick(ticket.getLicensePlate());
 
         assertThat(car.getLicensePlate()).isEqualTo(carLicensePlate);
 		assertThat(parkingLot.getSpace()).isEqualTo(5);
@@ -51,15 +50,15 @@ public class ParkingLotTest {
 
     @Test(expected = IllegalTicketException.class)
     public void should_fail_when_ticket_is_invalid() {
-        parkingLot.pick(TicketId.newTicketId());
+        parkingLot.pick("invalid-licenseplate");
     }
 
     @Test(expected = IllegalTicketException.class)
     public void should_fail_when_use_ticket_twice() {
         final Ticket ticket = parkingLot.park(car1);
 
-        parkingLot.pick(ticket.getId());
-        parkingLot.pick(ticket.getId());
+        parkingLot.pick(ticket.getLicensePlate());
+        parkingLot.pick(ticket.getLicensePlate());
     }
 
 }

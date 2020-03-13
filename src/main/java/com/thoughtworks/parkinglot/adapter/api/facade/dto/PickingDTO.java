@@ -8,6 +8,6 @@ import lombok.Value;
  */
 @Value
 public class PickingDTO implements Serializable {
-    private String ticketId;
-    private String parkingLotId;
+    private final String licensePlate;
+    private final String parkingLotId;
 }

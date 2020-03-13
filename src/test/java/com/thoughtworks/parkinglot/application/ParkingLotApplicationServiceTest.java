@@ -11,7 +11,6 @@ import com.thoughtworks.parkinglot.domain.model.parkinglot.ParkingLot;
 import com.thoughtworks.parkinglot.domain.model.parkinglot.ParkingLotId;
 import com.thoughtworks.parkinglot.domain.model.parkinglot.ParkingLotRepository;
 import com.thoughtworks.parkinglot.domain.model.parkinglot.Ticket;
-import com.thoughtworks.parkinglot.domain.model.parkinglot.TicketId;
 import com.thoughtworks.parkinglot.domain.service.ParkingManager;
 import java.util.Optional;
 import org.junit.Before;
@@ -52,27 +51,23 @@ public class ParkingLotApplicationServiceTest {
     @Test
     public void should_return_the_parked_car() {
         String carLicensePlate = "川A45678";
-        TicketId ticketId = TicketId.newTicketId();
-        final Ticket ticket = new Ticket(ticketId, carLicensePlate, parkingLotId);
         final Car expectedCar = Car.of(carLicensePlate);
         final ParkingLot parkingLot = mock(ParkingLot.class);
-        given(parkingLot.pick(ticket.getId())).willReturn(expectedCar);
+        given(parkingLot.pick(carLicensePlate)).willReturn(expectedCar);
         given(parkingLotRepository.findById(parkingLotId)).willReturn(Optional.of(parkingLot));
 
         ParkingLotApplicationService parkingLotApplicationService =
                 new ParkingLotApplicationService(parkingManager, parkingLotRepository);
-        final Car car = parkingLotApplicationService.pick(ticketId, parkingLotId);
+        final Car car = parkingLotApplicationService.pick(carLicensePlate, parkingLotId);
 
         assertThat(car).isEqualTo(expectedCar);
     }
 
     @Test(expected = IllegalTicketException.class)
     public void should_fail_when_ticket_is_invalid() {
-        TicketId ticketId = new TicketId("invalid-ticket-id");
-
         ParkingLotApplicationService parkingLotApplicationService =
                 new ParkingLotApplicationService(parkingManager, parkingLotRepository);
 
-        parkingLotApplicationService.pick(ticketId, parkingLotId);
+        parkingLotApplicationService.pick("invalid-ticket-id", parkingLotId);
     }
 }

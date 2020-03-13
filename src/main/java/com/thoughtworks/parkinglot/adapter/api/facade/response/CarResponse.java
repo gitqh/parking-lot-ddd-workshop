@@ -7,7 +7,5 @@ import lombok.Value;
  */
 @Value(staticConstructor = "of")
 public class CarResponse {
-
     private final String carLicensePlate;
-
 }

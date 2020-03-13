@@ -8,7 +8,6 @@ import com.thoughtworks.parkinglot.adapter.api.facade.response.CarResponse;
 import com.thoughtworks.parkinglot.adapter.api.facade.response.TicketResponse;
 import com.thoughtworks.parkinglot.application.ParkingLotApplicationService;
 import com.thoughtworks.parkinglot.domain.model.parkinglot.ParkingLotId;
-import com.thoughtworks.parkinglot.domain.model.parkinglot.TicketId;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -27,7 +26,7 @@ public class ParkingLotServiceFacade {
     }
 
     public CarResponse pick(final PickingDTO pickingDTO) {
-        return carMapper.to(parkingLotApplicationService.pick(new TicketId(pickingDTO.getTicketId()),
+        return carMapper.to(parkingLotApplicationService.pick(pickingDTO.getLicensePlate(),
                 new ParkingLotId(pickingDTO.getParkingLotId())));
     }
 }
