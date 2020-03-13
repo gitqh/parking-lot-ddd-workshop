@@ -7,7 +7,6 @@ import com.thoughtworks.parkinglot.domain.model.parkingboy.ParkingBoyRepository;
 import com.thoughtworks.parkinglot.domain.model.parkingboy.ParkingStrategyEnum;
 import com.thoughtworks.parkinglot.domain.model.parkinglot.ParkingLotId;
 import java.util.List;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -18,13 +17,10 @@ public class ParkingBoyMemRepository implements ParkingBoyRepository {
 
     private List<ParkingBoy> parkingBoys;
 
-    @Autowired
-    private ParkingBoyFactory parkingBoyFactory;
-
     {
         List<ParkingLotId> parkingLotIds = ImmutableList.of(new ParkingLotId("LOT001"), new ParkingLotId("LOT002"));
         parkingBoys = ImmutableList.of(
-                parkingBoyFactory.createParkingBoy(parkingLotIds, ParkingStrategyEnum.MAX_SPACE)
+                ParkingBoyFactory.createParkingBoy(parkingLotIds, ParkingStrategyEnum.MAX_SPACE)
         );
     }
 
