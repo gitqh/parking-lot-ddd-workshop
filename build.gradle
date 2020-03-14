@@ -49,6 +49,7 @@ ext {
     assertJVersion = '3.11.1'
     mockitoVersion = '2.25.1'
     powerMockVersion = '2.0.5'
+    archUnitVersion = "0.13.1"
 }
 
 dependencies {
@@ -68,6 +69,7 @@ dependencies {
     compileOnly "org.projectlombok:lombok:$lombokVersion"
     annotationProcessor "org.projectlombok:lombok:$lombokVersion"
 
+    testCompile "com.tngtech.archunit:archunit-junit4:$archUnitVersion"
     testImplementation "org.springframework.boot:spring-boot-starter-test"
     testImplementation "org.assertj:assertj-core:$assertJVersion"
     testImplementation "org.mockito:mockito-core:$mockitoVersion"
