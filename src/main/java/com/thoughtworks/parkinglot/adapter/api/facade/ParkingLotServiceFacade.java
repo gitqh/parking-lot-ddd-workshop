@@ -1,10 +1,13 @@
 package com.thoughtworks.parkinglot.adapter.api.facade;
 
-import com.thoughtworks.parkinglot.adapter.api.facade.dto.ParkingDTO;
+import com.thoughtworks.parkinglot.adapter.api.facade.dto.ParkingWithParkingBoyDTO;
+import com.thoughtworks.parkinglot.adapter.api.facade.dto.ParkingWithParkingManagerDTO;
 import com.thoughtworks.parkinglot.adapter.api.facade.dto.PickingDTO;
 import com.thoughtworks.parkinglot.adapter.api.facade.mapper.CarMapper;
+import com.thoughtworks.parkinglot.adapter.api.facade.mapper.ParkingLotIdMapper;
 import com.thoughtworks.parkinglot.adapter.api.facade.mapper.TicketMapper;
 import com.thoughtworks.parkinglot.adapter.api.facade.response.CarResponse;
+import com.thoughtworks.parkinglot.adapter.api.facade.response.ParkingLotIdResponse;
 import com.thoughtworks.parkinglot.adapter.api.facade.response.TicketResponse;
 import com.thoughtworks.parkinglot.application.ParkingLotApplicationService;
 import com.thoughtworks.parkinglot.domain.model.parkinglot.ParkingLotId;
@@ -20,9 +23,22 @@ public class ParkingLotServiceFacade {
     private final ParkingLotApplicationService parkingLotApplicationService;
     private final CarMapper carMapper;
     private final TicketMapper ticketMapper;
+    private final ParkingLotIdMapper parkingLotIdMapper;
 
-    public TicketResponse park(final ParkingDTO parkingDTO) {
-        return ticketMapper.to(parkingLotApplicationService.park(parkingDTO.getLicensePlate()));
+    public TicketResponse parkWithParkingBoy(final ParkingWithParkingBoyDTO parkingWithParkingBoyDTO) {
+        return ticketMapper.to(parkingLotApplicationService
+                .parkByParkingBoy(parkingWithParkingBoyDTO.getParkingBoyName(),
+                        parkingWithParkingBoyDTO.getLicensePlate()));
+    }
+
+    public TicketResponse parkWithParkingManager(final ParkingWithParkingManagerDTO parkingWithParkingManagerDTO) {
+        return ticketMapper.to(parkingLotApplicationService
+                .parkByParkingManager(parkingWithParkingManagerDTO.getLicensePlate()));
+    }
+
+    public ParkingLotIdResponse listsParkingLotWithSpace(final String... parkingManagerName) {
+        return parkingLotIdMapper.to(
+                parkingLotApplicationService.listsParkingLotWithSpace(parkingManagerName));
     }
 
     public CarResponse pick(final PickingDTO pickingDTO) {

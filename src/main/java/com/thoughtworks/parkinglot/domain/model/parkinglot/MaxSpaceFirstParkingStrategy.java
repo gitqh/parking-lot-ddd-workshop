@@ -1,6 +1,5 @@
-package com.thoughtworks.parkinglot.domain.model.parkingboy;
+package com.thoughtworks.parkinglot.domain.model.parkinglot;
 
-import com.thoughtworks.parkinglot.domain.model.parkinglot.ParkingLot;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;

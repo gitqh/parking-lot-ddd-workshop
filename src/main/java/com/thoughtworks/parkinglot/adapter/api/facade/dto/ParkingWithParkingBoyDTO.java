@@ -7,6 +7,7 @@ import lombok.Value;
  * @author gitqh
  */
 @Value
-public class ParkingDTO implements Serializable {
+public class ParkingWithParkingBoyDTO implements Serializable {
     private final String licensePlate;
+    private final String parkingBoyName;
 }

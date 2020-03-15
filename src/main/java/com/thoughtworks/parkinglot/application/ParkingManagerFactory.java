@@ -1,0 +1,31 @@
+package com.thoughtworks.parkinglot.application;
+
+import com.thoughtworks.parkinglot.domain.model.parkingconfig.ParkingManagerConfig;
+import com.thoughtworks.parkinglot.domain.model.parkingconfig.ParkingManagerConfigRepository;
+import com.thoughtworks.parkinglot.domain.model.parkinglot.ParkingBoy;
+import com.thoughtworks.parkinglot.domain.model.parkinglot.ParkingManager;
+import java.util.List;
+import java.util.stream.Collectors;
+import lombok.AllArgsConstructor;
+import org.springframework.stereotype.Component;
+
+/**
+ * @author gitqh
+ */
+@AllArgsConstructor
+@Component
+public class ParkingManagerFactory {
+    private ParkingManagerConfigRepository parkingManagerConfigRepository;
+    private ParkingBoyFactory parkingBoyFactory;
+
+    public ParkingManager findParkingManagerByName(final String... name) {
+
+        ParkingManagerConfig parkingManagerConfig = name == null
+                ? parkingManagerConfigRepository.findDefault()
+                : parkingManagerConfigRepository.findByName(name[0]);
+        List<ParkingBoy> parkingBoys = parkingManagerConfig.getParkingBoyConfigIds().stream()
+                .map(id -> parkingBoyFactory.findParkingBoyById(id))
+                .collect(Collectors.toList());
+        return ParkingManager.of(parkingManagerConfig.getName(), parkingBoys);
+    }
+}

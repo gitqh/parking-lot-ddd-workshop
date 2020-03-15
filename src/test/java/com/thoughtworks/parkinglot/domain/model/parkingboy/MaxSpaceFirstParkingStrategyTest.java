@@ -5,7 +5,9 @@ import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.mock;
 
 import com.google.common.collect.ImmutableList;
+import com.thoughtworks.parkinglot.domain.model.parkinglot.MaxSpaceFirstParkingStrategy;
 import com.thoughtworks.parkinglot.domain.model.parkinglot.ParkingLot;
+import com.thoughtworks.parkinglot.domain.model.parkinglot.ParkingStrategy;
 import java.util.Optional;
 import org.junit.Before;
 import org.junit.Test;

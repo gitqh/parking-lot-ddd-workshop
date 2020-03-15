@@ -37,7 +37,7 @@ public class ParkingLotTest {
         final Car car = parkingLot.pick(ticket.getLicensePlate());
 
         assertThat(car.getLicensePlate()).isEqualTo(carLicensePlate);
-		assertThat(parkingLot.getSpace()).isEqualTo(5);
+        assertThat(parkingLot.getSpace()).isEqualTo(5);
     }
 
     @Test(expected = NoEnoughCapacityException.class)
@@ -45,7 +45,7 @@ public class ParkingLotTest {
         final ParkingLot parkingLot = new ParkingLot(parkingLotId, 1);
         parkingLot.park(car1);
         parkingLot.park(Car.of("川A30001"));
-		assertThat(parkingLot.getSpace()).isEqualTo(0);
+        assertThat(parkingLot.getSpace()).isEqualTo(0);
     }
 
     @Test(expected = IllegalTicketException.class)
