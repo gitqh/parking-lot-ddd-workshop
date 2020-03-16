@@ -15,11 +15,12 @@ public class ParkingManager {
     private final String name;
     private final List<ParkingBoy> parkingBoys;
 
-    public List<ParkingLot> listParkingLotIds() {
+    public List<ParkingLotId> listParkingLotIds() {
         return parkingBoys.stream()
                 .map(ParkingBoy::find)
                 .filter(Optional::isPresent)
                 .map(Optional::get)
+                .map(ParkingLot::getId)
                 .collect(Collectors.toList());
     }
 

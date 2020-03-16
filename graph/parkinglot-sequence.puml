@@ -1,0 +1,23 @@
+@startuml parkinglot-sequence
+skinparam Shadowing false
+skinparam class {
+    BackgroundColor PaleTurquoise
+    ArrowCollor SeaGreen
+}
+
+participant Application
+participant ParkingBoyFactory
+participant ParkingManagerFactory
+participant ParkingLotRepository
+
+-> Application: parkingBoyName & licensePlate
+activate Application
+
+Application -> ParkingBoyFactory: findParkingBoyByName
+activate ParkingBoyFactory
+
+
+
+
+
+@enduml

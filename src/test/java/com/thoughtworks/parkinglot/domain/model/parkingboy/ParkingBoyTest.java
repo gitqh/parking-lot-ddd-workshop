@@ -1,29 +1,27 @@
 package com.thoughtworks.parkinglot.domain.model.parkingboy;
 
-import com.thoughtworks.parkinglot.domain.model.parkingconfig.ParkingBoyConfigId;
-import com.thoughtworks.parkinglot.domain.model.parkinglot.ParkingLotId;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.verify;
+
+import com.thoughtworks.parkinglot.domain.model.parkinglot.ParkingBoy;
 import com.thoughtworks.parkinglot.domain.model.parkinglot.ParkingStrategy;
-import java.util.List;
+import org.assertj.core.util.Lists;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
-import org.powermock.modules.junit4.PowerMockRunner;
+import org.mockito.junit.MockitoJUnitRunner;
 
-@RunWith(PowerMockRunner.class)
+@RunWith(MockitoJUnitRunner.class)
 public class ParkingBoyTest {
-    @Mock
-    private ParkingBoyConfigId parkingBoyConfigId;
-    @Mock
-    private List<ParkingLotId> parkingLotIds;
+
     @Mock
     private ParkingStrategy parkingStrategy;
 
     @Test
-    public void should_find_parking_lot_use_parkingStrategy() {
-//        ParkingBoy parkingBoy = ParkingBoy.of(parkingBoyId, parkingLotIds, parkingStrategy);
-//        parkingBoy.find(Lists.newArrayList());
-//
-//        verify(parkingStrategy).find(any());
+    public void should_find_parking_lot_use_parking_strategy() {
+        ParkingBoy parkingBoy = ParkingBoy.of("Allen", Lists.newArrayList(), parkingStrategy);
+        parkingBoy.find();
 
+        verify(parkingStrategy).find(any());
     }
 }

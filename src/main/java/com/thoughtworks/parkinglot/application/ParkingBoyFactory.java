@@ -18,7 +18,7 @@ import org.springframework.stereotype.Component;
  */
 @AllArgsConstructor
 @Component
-public final class ParkingBoyFactory {
+public class ParkingBoyFactory {
 
     private ParkingBoyConfigRepository parkingBoyConfigRepository;
 

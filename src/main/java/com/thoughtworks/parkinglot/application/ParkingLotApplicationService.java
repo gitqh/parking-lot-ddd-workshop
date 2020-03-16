@@ -2,7 +2,6 @@ package com.thoughtworks.parkinglot.application;
 
 import com.thoughtworks.parkinglot.domain.exception.IllegalTicketException;
 import com.thoughtworks.parkinglot.domain.exception.NoEnoughCapacityException;
-import com.thoughtworks.parkinglot.domain.model.parkingconfig.ParkingManagerConfigRepository;
 import com.thoughtworks.parkinglot.domain.model.parkinglot.Car;
 import com.thoughtworks.parkinglot.domain.model.parkinglot.ParkingBoy;
 import com.thoughtworks.parkinglot.domain.model.parkinglot.ParkingLot;
@@ -11,7 +10,6 @@ import com.thoughtworks.parkinglot.domain.model.parkinglot.ParkingLotRepository;
 import com.thoughtworks.parkinglot.domain.model.parkinglot.ParkingManager;
 import com.thoughtworks.parkinglot.domain.model.parkinglot.Ticket;
 import java.util.List;
-import java.util.stream.Collectors;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -22,7 +20,6 @@ import org.springframework.stereotype.Service;
 @AllArgsConstructor
 public class ParkingLotApplicationService {
     private final ParkingLotRepository parkingLotRepository;
-    private final ParkingManagerConfigRepository parkingManagerMemRepository;
     private final ParkingBoyFactory parkingBoyFactory;
     private final ParkingManagerFactory parkingManagerFactory;
 
@@ -41,9 +38,7 @@ public class ParkingLotApplicationService {
 
     public List<ParkingLotId> listsParkingLotWithSpace(final String... parkingManagerName) {
         ParkingManager parkingManager = parkingManagerFactory.findParkingManagerByName(parkingManagerName);
-        return parkingManager.listParkingLotIds().stream()
-                .map(ParkingLot::getId)
-                .collect(Collectors.toList());
+        return parkingManager.listParkingLotIds();
     }
 
     public Car pick(final String licensePlate, final ParkingLotId parkingLotId) {

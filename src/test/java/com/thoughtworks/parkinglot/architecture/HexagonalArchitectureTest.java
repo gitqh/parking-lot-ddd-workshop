@@ -19,9 +19,9 @@ public class HexagonalArchitectureTest {
     @ArchTest
     static final ArchRule hexagonal_architecture_is_respected = onionArchitecture()
             .domainModels("..domain.model..")
-            .domainServices("..domain.service..")
             .applicationServices("..application..")
             .adapter("api", "..adapter.api..")
-            .adapter("repository", "..adapter.repository..");
+            .adapter("repository", "..adapter.repository..")
+            .withOptionalLayers(true);
 
 }
