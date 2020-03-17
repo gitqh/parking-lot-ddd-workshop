@@ -2,19 +2,33 @@
 skinparam Shadowing false
 skinparam class {
     BackgroundColor PaleTurquoise
-    ArrowCollor SeaGreen
+    ArrowColor SeaGreen
 }
+
+title: "parking by parking boy"
 
 participant Application
 participant ParkingBoyFactory
-participant ParkingManagerFactory
-participant ParkingLotRepository
+participant ParkingBoy
+participant ParkingLot
+participant Car
 
 -> Application: parkingBoyName & licensePlate
 activate Application
 
 Application -> ParkingBoyFactory: findParkingBoyByName
 activate ParkingBoyFactory
+
+ParkingBoyFactory --> Application: parkingBoy
+
+Application -> ParkingBoy:
+activate ParkingBoy
+
+ParkingBoy -> ParkingLot: find
+activate ParkingLot
+
+ParkingLot -> Car: park
+Car --> Application: ticket
 
 
 

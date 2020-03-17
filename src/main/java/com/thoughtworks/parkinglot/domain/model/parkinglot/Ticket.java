@@ -6,7 +6,7 @@ import lombok.Getter;
 /**
  * @author gitqh
  */
-@AllArgsConstructor
+@AllArgsConstructor(staticName = "of")
 @Getter
 public class Ticket {
     private final String licensePlate;

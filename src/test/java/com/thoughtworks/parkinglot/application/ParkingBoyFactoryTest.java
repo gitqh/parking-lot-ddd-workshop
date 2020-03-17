@@ -46,11 +46,11 @@ public class ParkingBoyFactoryTest {
 
     @Test
     public void should_return_boy_by_name() {
-        ParkingStrategy parkingStrategy = NaturalParkingStrategy.of();
+        final ParkingStrategy parkingStrategy = NaturalParkingStrategy.of();
         given(parkingBoyConfigRepository.findByName(any())).willReturn(parkingBoyConfig);
 
         PowerMockito.when(SpringContextConfig.getBean(any())).thenReturn(parkingStrategy);
-        ParkingBoy expectedParkingBoy = ParkingBoy.of(
+        final ParkingBoy expectedParkingBoy = ParkingBoy.of(
                 "Allen",
                 ImmutableList.of(),
                 parkingStrategy
@@ -63,10 +63,10 @@ public class ParkingBoyFactoryTest {
 
     @Test
     public void should_return_boy_by_id() {
-        ParkingStrategy parkingStrategy = NaturalParkingStrategy.of();
+        final ParkingStrategy parkingStrategy = NaturalParkingStrategy.of();
         given(parkingBoyConfigRepository.findById(any())).willReturn(parkingBoyConfig);
         PowerMockito.when(SpringContextConfig.getBean(any())).thenReturn(parkingStrategy);
-        ParkingBoy expectedParkingBoy = ParkingBoy.of(
+        final ParkingBoy expectedParkingBoy = ParkingBoy.of(
                 "Allen",
                 ImmutableList.of(),
                 parkingStrategy

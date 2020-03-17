@@ -28,7 +28,7 @@ public class ParkingLot {
         if (!isAvailable()) {
             throw new NoEnoughCapacityException();
         }
-        final Ticket ticket = new Ticket(car.getLicensePlate(), id);
+        final Ticket ticket = Ticket.of(car.getLicensePlate(), id);
         ticketToCar.put(car.getLicensePlate(), car);
         return ticket;
     }

@@ -19,7 +19,7 @@ public class ParkingBoyTest {
 
     @Test
     public void should_find_parking_lot_use_parking_strategy() {
-        ParkingBoy parkingBoy = ParkingBoy.of("Allen", Lists.newArrayList(), parkingStrategy);
+        final ParkingBoy parkingBoy = ParkingBoy.of("Allen", Lists.newArrayList(), parkingStrategy);
         parkingBoy.find();
 
         verify(parkingStrategy).find(any());

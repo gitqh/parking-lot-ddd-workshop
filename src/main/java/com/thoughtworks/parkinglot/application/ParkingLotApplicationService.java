@@ -31,8 +31,7 @@ public class ParkingLotApplicationService {
 
     public Ticket parkByParkingManager(final String licensePlate, final String... parkingManagerName) {
         ParkingManager parkingManager = parkingManagerFactory.findParkingManagerByName(parkingManagerName);
-        ParkingLot parkingLot = parkingManager.findParkingLot()
-                .orElseThrow(NoEnoughCapacityException::new);
+        ParkingLot parkingLot = parkingManager.findParkingLot().orElseThrow(NoEnoughCapacityException::new);
         return parkingLot.park(Car.of(licensePlate));
     }
 

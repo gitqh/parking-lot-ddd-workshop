@@ -36,7 +36,7 @@ public class ParkingManagerTest {
 
     @Test
     public void should_list_all_parking_lot_ids() {
-        List<ParkingBoy> parkingBoys = ImmutableList.of(
+        final List<ParkingBoy> parkingBoys = ImmutableList.of(
                 ParkingBoy.of("Allen",
                         ImmutableList.of(ParkingLot.of(new ParkingLotId("LOT001"), 1, Collections.emptyMap())),
                     NaturalParkingStrategy.of()),
@@ -44,10 +44,10 @@ public class ParkingManagerTest {
                 ImmutableList.of(ParkingLot.of(new ParkingLotId("LOT002"), 1, Collections.emptyMap())),
                 NaturalParkingStrategy.of())
         );
-        List<ParkingLotId> expectedIds = Arrays.asList(new ParkingLotId("LOT001"), new ParkingLotId("LOT002"));
-        ParkingManager parkingManager = ParkingManager.of("", parkingBoys);
+        final List<ParkingLotId> expectedIds = Arrays.asList(new ParkingLotId("LOT001"), new ParkingLotId("LOT002"));
+        final ParkingManager parkingManager = ParkingManager.of("", parkingBoys);
 
-        List<ParkingLotId> actualIds = parkingManager.listParkingLotIds();
+        final List<ParkingLotId> actualIds = parkingManager.listParkingLotIds();
 
         assertThat(actualIds.size()).isEqualTo(expectedIds.size());
     }

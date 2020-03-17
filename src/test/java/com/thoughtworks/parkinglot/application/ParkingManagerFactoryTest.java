@@ -31,30 +31,30 @@ public class ParkingManagerFactoryTest {
 
     @Test
     public void should_return_default_manager_when_not_given_name() {
-        ParkingManagerConfig parkingManagerConfig = ParkingManagerConfig.of(
+        final ParkingManagerConfig parkingManagerConfig = ParkingManagerConfig.of(
                 new ParkingManagerConfigId("MANAGER001"),
                 "Ross",
                 ImmutableList.of()
         );
         given(parkingManagerConfigRepository.findDefault()).willReturn(parkingManagerConfig);
-        ParkingManager expectedManager = ParkingManager.of("Ross", ImmutableList.of());
+        final ParkingManager expectedManager = ParkingManager.of("Ross", ImmutableList.of());
 
-        ParkingManager actualManager = parkingManagerFactory.findParkingManagerByName((String[]) null);
+        final ParkingManager actualManager = parkingManagerFactory.findParkingManagerByName((String[]) null);
 
         assertThat(actualManager).isEqualTo(expectedManager);
     }
 
     @Test
     public void should_return_expected_manager_when_given_name() {
-        ParkingManagerConfig parkingManagerConfig = ParkingManagerConfig.of(
+        final ParkingManagerConfig parkingManagerConfig = ParkingManagerConfig.of(
                 new ParkingManagerConfigId("MANAGER001"),
                 "Ross",
                 ImmutableList.of()
         );
         given(parkingManagerConfigRepository.findByName(any())).willReturn(parkingManagerConfig);
-        ParkingManager expectedManager = ParkingManager.of("Ross", ImmutableList.of());
+        final ParkingManager expectedManager = ParkingManager.of("Ross", ImmutableList.of());
 
-        ParkingManager actualManager = parkingManagerFactory.findParkingManagerByName("Ross");
+        final ParkingManager actualManager = parkingManagerFactory.findParkingManagerByName("Ross");
 
         assertThat(actualManager).isEqualTo(expectedManager);
     }
