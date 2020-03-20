@@ -24,7 +24,7 @@ public class ParkingBoyFactory {
 
     private ParkingLotRepository parkingLotRepository;
 
-    public ParkingBoy findParkingBoyByName(final String name) {
+    public ParkingBoy create(final String name) {
         ParkingBoyConfig parkingBoyConfig = parkingBoyConfigRepository.findByName(name);
         List<ParkingLot> parkingLots = findParkingLot(parkingBoyConfig.getParkingLotIds());
         ParkingStrategy parkingStrategy = (ParkingStrategy) SpringContextConfig.getBean(
@@ -32,7 +32,7 @@ public class ParkingBoyFactory {
         return ParkingBoy.of(parkingBoyConfig.getName(), parkingLots, parkingStrategy);
     }
 
-    public ParkingBoy findParkingBoyById(final ParkingBoyConfigId id) {
+    public ParkingBoy create(final ParkingBoyConfigId id) {
         ParkingBoyConfig parkingBoyConfig = parkingBoyConfigRepository.findById(id.getValue());
         List<ParkingLot> parkingLots = findParkingLot(parkingBoyConfig.getParkingLotIds());
         ParkingStrategy parkingStrategy = (ParkingStrategy) SpringContextConfig.getBean(

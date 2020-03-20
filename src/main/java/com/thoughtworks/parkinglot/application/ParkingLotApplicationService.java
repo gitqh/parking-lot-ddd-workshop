@@ -24,19 +24,19 @@ public class ParkingLotApplicationService {
     private final ParkingManagerFactory parkingManagerFactory;
 
     public Ticket parkByParkingBoy(final String parkingBoyName, final String licensePlate) {
-        ParkingBoy parkingBoy = parkingBoyFactory.findParkingBoyByName(parkingBoyName);
+        ParkingBoy parkingBoy = parkingBoyFactory.create(parkingBoyName);
         ParkingLot parkingLot = parkingBoy.find().orElseThrow(NoEnoughCapacityException::new);
         return parkingLot.park(Car.of(licensePlate));
     }
 
     public Ticket parkByParkingManager(final String licensePlate, final String... parkingManagerName) {
-        ParkingManager parkingManager = parkingManagerFactory.findParkingManagerByName(parkingManagerName);
+        ParkingManager parkingManager = parkingManagerFactory.create(parkingManagerName);
         ParkingLot parkingLot = parkingManager.findParkingLot().orElseThrow(NoEnoughCapacityException::new);
         return parkingLot.park(Car.of(licensePlate));
     }
 
     public List<ParkingLotId> listsParkingLotWithSpace(final String... parkingManagerName) {
-        ParkingManager parkingManager = parkingManagerFactory.findParkingManagerByName(parkingManagerName);
+        ParkingManager parkingManager = parkingManagerFactory.create(parkingManagerName);
         return parkingManager.listParkingLotIds();
     }
 

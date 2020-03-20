@@ -18,13 +18,13 @@ public class ParkingManagerFactory {
     private ParkingManagerConfigRepository parkingManagerConfigRepository;
     private ParkingBoyFactory parkingBoyFactory;
 
-    public ParkingManager findParkingManagerByName(final String... name) {
+    public ParkingManager create(final String... name) {
 
         ParkingManagerConfig parkingManagerConfig = name == null
                 ? parkingManagerConfigRepository.findDefault()
                 : parkingManagerConfigRepository.findByName(name[0]);
         List<ParkingBoy> parkingBoys = parkingManagerConfig.getParkingBoyConfigIds().stream()
-                .map(id -> parkingBoyFactory.findParkingBoyById(id))
+                .map(id -> parkingBoyFactory.create(id))
                 .collect(Collectors.toList());
         return ParkingManager.of(parkingManagerConfig.getName(), parkingBoys);
     }

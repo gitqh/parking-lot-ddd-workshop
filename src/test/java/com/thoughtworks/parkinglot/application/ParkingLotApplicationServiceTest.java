@@ -54,7 +54,7 @@ public class ParkingLotApplicationServiceTest {
         final String licensePlate = "川A23456";
         final String parkingBoyName = "Allen";
         final Ticket expectedTicket = Ticket.of(licensePlate, parkingLotId);
-        given(parkingBoyFactory.findParkingBoyByName(parkingBoyName)).willReturn(parkingBoy);
+        given(parkingBoyFactory.create(parkingBoyName)).willReturn(parkingBoy);
         given(parkingBoy.find()).willReturn(Optional.of(parkingLot));
         given(parkingLot.park(Car.of(licensePlate))).willReturn(expectedTicket);
 
@@ -67,7 +67,7 @@ public class ParkingLotApplicationServiceTest {
     public void should_fail_when_all_parking_lot_belong_to_boy_is_full() {
         final String licensePlate = "川A23456";
         final String parkingBoyName = "Allen";
-        given(parkingBoyFactory.findParkingBoyByName(parkingBoyName)).willReturn(parkingBoy);
+        given(parkingBoyFactory.create(parkingBoyName)).willReturn(parkingBoy);
         given(parkingBoy.find()).willReturn(Optional.empty());
 
         parkingLotApplicationService.parkByParkingBoy(parkingBoyName, licensePlate);
@@ -78,7 +78,7 @@ public class ParkingLotApplicationServiceTest {
         final String parkingManagerName = "Ross";
         final String licensePlate = "川A23456";
         final Ticket expectedTicket = Ticket.of(licensePlate, parkingLotId);
-        given(parkingManagerFactory.findParkingManagerByName(parkingManagerName)).willReturn(parkingManager);
+        given(parkingManagerFactory.create(parkingManagerName)).willReturn(parkingManager);
         given(parkingManager.findParkingLot()).willReturn(Optional.of(parkingLot));
         given(parkingLot.park(Car.of(licensePlate))).willReturn(expectedTicket);
 
@@ -91,7 +91,7 @@ public class ParkingLotApplicationServiceTest {
     public void should_fail_when_all_parking_lot_belong_to_manager_is_full() {
         final String licensePlate = "川A23456";
         final String parkingManagerName = "Allen";
-        given(parkingManagerFactory.findParkingManagerByName(parkingManagerName)).willReturn(parkingManager);
+        given(parkingManagerFactory.create(parkingManagerName)).willReturn(parkingManager);
         given(parkingManager.findParkingLot()).willReturn(Optional.empty());
 
         parkingLotApplicationService.parkByParkingManager(licensePlate, parkingManagerName);
@@ -112,7 +112,7 @@ public class ParkingLotApplicationServiceTest {
     @Test
     public void should_return_parkingLotIds() {
         final String parkingManagerName = "Allen";
-        given(parkingManagerFactory.findParkingManagerByName(parkingManagerName)).willReturn(parkingManager);
+        given(parkingManagerFactory.create(parkingManagerName)).willReturn(parkingManager);
         given(parkingManager.listParkingLotIds()).willReturn(parkingLotIds);
 
         List<ParkingLotId> actualParkingLotIds = parkingLotApplicationService.listsParkingLotWithSpace(parkingManagerName);

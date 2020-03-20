@@ -56,7 +56,7 @@ public class ParkingBoyFactoryTest {
                 parkingStrategy
         );
 
-        final ParkingBoy parkingBoy = parkingBoyFactory.findParkingBoyByName("Allen");
+        final ParkingBoy parkingBoy = parkingBoyFactory.create("Allen");
 
         assertThat(parkingBoy).isEqualTo(expectedParkingBoy);
     }
@@ -72,7 +72,7 @@ public class ParkingBoyFactoryTest {
                 parkingStrategy
         );
 
-        final ParkingBoy parkingBoy = parkingBoyFactory.findParkingBoyById(new ParkingBoyConfigId("BOY001"));
+        final ParkingBoy parkingBoy = parkingBoyFactory.create(new ParkingBoyConfigId("BOY001"));
 
         assertThat(parkingBoy).isEqualTo(expectedParkingBoy);
     }

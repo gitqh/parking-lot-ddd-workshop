@@ -39,7 +39,7 @@ public class ParkingManagerFactoryTest {
         given(parkingManagerConfigRepository.findDefault()).willReturn(parkingManagerConfig);
         final ParkingManager expectedManager = ParkingManager.of("Ross", ImmutableList.of());
 
-        final ParkingManager actualManager = parkingManagerFactory.findParkingManagerByName((String[]) null);
+        final ParkingManager actualManager = parkingManagerFactory.create((String[]) null);
 
         assertThat(actualManager).isEqualTo(expectedManager);
     }
@@ -54,7 +54,7 @@ public class ParkingManagerFactoryTest {
         given(parkingManagerConfigRepository.findByName(any())).willReturn(parkingManagerConfig);
         final ParkingManager expectedManager = ParkingManager.of("Ross", ImmutableList.of());
 
-        final ParkingManager actualManager = parkingManagerFactory.findParkingManagerByName("Ross");
+        final ParkingManager actualManager = parkingManagerFactory.create("Ross");
 
         assertThat(actualManager).isEqualTo(expectedManager);
     }
