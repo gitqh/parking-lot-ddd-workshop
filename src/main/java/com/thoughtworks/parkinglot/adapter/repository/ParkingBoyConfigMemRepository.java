@@ -4,10 +4,10 @@ import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
 import com.thoughtworks.parkinglot.domain.exception.ParkingBoyNotFoundException;
 import com.thoughtworks.parkinglot.domain.model.parkingconfig.ParkingBoyConfig;
-import com.thoughtworks.parkinglot.domain.model.parkingconfig.ParkingBoyConfigId;
+import com.thoughtworks.parkinglot.domain.model.parkingconfig.ParkingBoyId;
 import com.thoughtworks.parkinglot.domain.model.parkingconfig.ParkingBoyConfigRepository;
 import com.thoughtworks.parkinglot.domain.model.parkingconfig.ParkingStrategyName;
-import com.thoughtworks.parkinglot.domain.model.parkinglot.ParkingLotId;
+import com.thoughtworks.parkinglot.domain.model.finder.ParkingLotId;
 import java.util.List;
 import org.springframework.stereotype.Repository;
 
@@ -22,7 +22,7 @@ public class ParkingBoyConfigMemRepository implements ParkingBoyConfigRepository
 
     {
         ParkingBoyConfig allen = ParkingBoyConfig.of(
-                new ParkingBoyConfigId("BOY001"),
+                new ParkingBoyId("BOY001"),
                 "Allen",
                 ImmutableList.of(new ParkingLotId("LOT001"), new ParkingLotId("LOT002")
                 ),
@@ -30,7 +30,7 @@ public class ParkingBoyConfigMemRepository implements ParkingBoyConfigRepository
         );
 
         ParkingBoyConfig booker = ParkingBoyConfig.of(
-                new ParkingBoyConfigId("BOY002"),
+                new ParkingBoyId("BOY002"),
                 "Booker",
                 ImmutableList.of(new ParkingLotId("LOT003"), new ParkingLotId("LOT004")
                 ),
@@ -38,7 +38,7 @@ public class ParkingBoyConfigMemRepository implements ParkingBoyConfigRepository
         );
 
         ParkingBoyConfig charles = ParkingBoyConfig.of(
-                new ParkingBoyConfigId("BOY003"),
+                new ParkingBoyId("BOY003"),
                 "harles",
                 ImmutableList.of(new ParkingLotId("LOT005"), new ParkingLotId("LOT006")
                 ),
@@ -46,7 +46,7 @@ public class ParkingBoyConfigMemRepository implements ParkingBoyConfigRepository
         );
 
         ParkingBoyConfig devin = ParkingBoyConfig.of(
-                new ParkingBoyConfigId("BOY004"),
+                new ParkingBoyId("BOY004"),
                 "Devin",
                 ImmutableList.of(new ParkingLotId("LOT007"), new ParkingLotId("LOT008")
                 ),

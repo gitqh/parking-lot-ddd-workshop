@@ -1,7 +1,7 @@
 package com.thoughtworks.parkinglot.domain.model.strategy;
 
-import com.thoughtworks.parkinglot.domain.model.parkinglot.ParkingLot;
-import com.thoughtworks.parkinglot.domain.model.parkinglot.ParkingStrategy;
+import com.thoughtworks.parkinglot.domain.model.finder.ParkingLot;
+import com.thoughtworks.parkinglot.domain.model.finder.ParkingStrategy;
 import java.util.Collection;
 import java.util.Optional;
 import lombok.Value;

@@ -4,6 +4,10 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import com.thoughtworks.parkinglot.domain.exception.IllegalTicketException;
 import com.thoughtworks.parkinglot.domain.exception.NoEnoughCapacityException;
+import com.thoughtworks.parkinglot.domain.model.finder.Car;
+import com.thoughtworks.parkinglot.domain.model.finder.ParkingLot;
+import com.thoughtworks.parkinglot.domain.model.finder.ParkingLotId;
+import com.thoughtworks.parkinglot.domain.model.finder.Ticket;
 import org.junit.Before;
 import org.junit.Test;
 

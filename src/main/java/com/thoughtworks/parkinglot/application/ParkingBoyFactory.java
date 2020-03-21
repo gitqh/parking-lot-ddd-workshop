@@ -2,13 +2,13 @@ package com.thoughtworks.parkinglot.application;
 
 import com.thoughtworks.parkinglot.config.SpringContextConfig;
 import com.thoughtworks.parkinglot.domain.model.parkingconfig.ParkingBoyConfig;
-import com.thoughtworks.parkinglot.domain.model.parkingconfig.ParkingBoyConfigId;
+import com.thoughtworks.parkinglot.domain.model.parkingconfig.ParkingBoyId;
 import com.thoughtworks.parkinglot.domain.model.parkingconfig.ParkingBoyConfigRepository;
-import com.thoughtworks.parkinglot.domain.model.parkinglot.ParkingBoy;
-import com.thoughtworks.parkinglot.domain.model.parkinglot.ParkingLot;
-import com.thoughtworks.parkinglot.domain.model.parkinglot.ParkingLotId;
-import com.thoughtworks.parkinglot.domain.model.parkinglot.ParkingLotRepository;
-import com.thoughtworks.parkinglot.domain.model.parkinglot.ParkingStrategy;
+import com.thoughtworks.parkinglot.domain.model.finder.ParkingBoy;
+import com.thoughtworks.parkinglot.domain.model.finder.ParkingLot;
+import com.thoughtworks.parkinglot.domain.model.finder.ParkingLotId;
+import com.thoughtworks.parkinglot.domain.model.finder.ParkingLotRepository;
+import com.thoughtworks.parkinglot.domain.model.finder.ParkingStrategy;
 import java.util.List;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
@@ -32,7 +32,7 @@ public class ParkingBoyFactory {
         return ParkingBoy.of(parkingBoyConfig.getName(), parkingLots, parkingStrategy);
     }
 
-    public ParkingBoy create(final ParkingBoyConfigId id) {
+    public ParkingBoy create(final ParkingBoyId id) {
         ParkingBoyConfig parkingBoyConfig = parkingBoyConfigRepository.findById(id.getValue());
         List<ParkingLot> parkingLots = findParkingLot(parkingBoyConfig.getParkingLotIds());
         ParkingStrategy parkingStrategy = (ParkingStrategy) SpringContextConfig.getBean(

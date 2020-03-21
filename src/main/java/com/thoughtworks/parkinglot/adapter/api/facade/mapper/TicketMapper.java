@@ -1,7 +1,7 @@
 package com.thoughtworks.parkinglot.adapter.api.facade.mapper;
 
 import com.thoughtworks.parkinglot.adapter.api.facade.response.TicketResponse;
-import com.thoughtworks.parkinglot.domain.model.parkinglot.Ticket;
+import com.thoughtworks.parkinglot.domain.model.finder.Ticket;
 import org.springframework.stereotype.Component;
 
 /**

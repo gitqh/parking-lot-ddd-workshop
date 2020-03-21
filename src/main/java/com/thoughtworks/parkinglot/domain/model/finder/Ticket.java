@@ -1,4 +1,4 @@
-package com.thoughtworks.parkinglot.domain.model.parkinglot;
+package com.thoughtworks.parkinglot.domain.model.finder;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

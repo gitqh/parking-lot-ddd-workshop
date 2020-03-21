@@ -5,10 +5,10 @@ import static org.mockito.BDDMockito.given;
 
 import com.google.common.collect.ImmutableList;
 import com.thoughtworks.parkinglot.domain.model.strategy.JuniorParkingStrategy;
-import com.thoughtworks.parkinglot.domain.model.parkinglot.ParkingBoy;
-import com.thoughtworks.parkinglot.domain.model.parkinglot.ParkingLot;
-import com.thoughtworks.parkinglot.domain.model.parkinglot.ParkingLotId;
-import com.thoughtworks.parkinglot.domain.model.parkinglot.ParkingManager;
+import com.thoughtworks.parkinglot.domain.model.finder.ParkingBoy;
+import com.thoughtworks.parkinglot.domain.model.finder.ParkingLot;
+import com.thoughtworks.parkinglot.domain.model.finder.ParkingLotId;
+import com.thoughtworks.parkinglot.domain.model.finder.ParkingManager;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -54,7 +54,7 @@ public class ParkingManagerTest {
 
     @Test
     public void should_return_parking_lot_from_1st_boy_when_returned_1st_boy() {
-        given(boy1.find()).willReturn(Optional.of(parkingLot));
+        given(boy1.findParkingLot()).willReturn(Optional.of(parkingLot));
 
         final Optional<ParkingLot> expectedParkingLot = parkingManager.findParkingLot();
 
@@ -63,8 +63,8 @@ public class ParkingManagerTest {
 
     @Test
     public void should_return_parking_lot_from_2nd_boy_when_not_returned_1st_boy() {
-        given(boy1.find()).willReturn(Optional.empty());
-        given(boy2.find()).willReturn(Optional.of(parkingLot));
+        given(boy1.findParkingLot()).willReturn(Optional.empty());
+        given(boy2.findParkingLot()).willReturn(Optional.of(parkingLot));
 
         final Optional<ParkingLot> expectedParkingLot = parkingManager.findParkingLot();
 

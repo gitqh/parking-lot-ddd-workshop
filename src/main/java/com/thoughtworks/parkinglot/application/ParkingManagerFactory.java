@@ -2,8 +2,8 @@ package com.thoughtworks.parkinglot.application;
 
 import com.thoughtworks.parkinglot.domain.model.parkingconfig.ParkingManagerConfig;
 import com.thoughtworks.parkinglot.domain.model.parkingconfig.ParkingManagerConfigRepository;
-import com.thoughtworks.parkinglot.domain.model.parkinglot.ParkingBoy;
-import com.thoughtworks.parkinglot.domain.model.parkinglot.ParkingManager;
+import com.thoughtworks.parkinglot.domain.model.finder.ParkingBoy;
+import com.thoughtworks.parkinglot.domain.model.finder.ParkingManager;
 import java.util.List;
 import java.util.stream.Collectors;
 import lombok.AllArgsConstructor;
@@ -23,7 +23,7 @@ public class ParkingManagerFactory {
         ParkingManagerConfig parkingManagerConfig = name == null
                 ? parkingManagerConfigRepository.findDefault()
                 : parkingManagerConfigRepository.findByName(name[0]);
-        List<ParkingBoy> parkingBoys = parkingManagerConfig.getParkingBoyConfigIds().stream()
+        List<ParkingBoy> parkingBoys = parkingManagerConfig.getParkingBoyIds().stream()
                 .map(id -> parkingBoyFactory.create(id))
                 .collect(Collectors.toList());
         return ParkingManager.of(parkingManagerConfig.getName(), parkingBoys);

@@ -2,13 +2,13 @@ package com.thoughtworks.parkinglot.application;
 
 import com.thoughtworks.parkinglot.domain.exception.IllegalTicketException;
 import com.thoughtworks.parkinglot.domain.exception.NoEnoughCapacityException;
-import com.thoughtworks.parkinglot.domain.model.parkinglot.Car;
-import com.thoughtworks.parkinglot.domain.model.parkinglot.ParkingBoy;
-import com.thoughtworks.parkinglot.domain.model.parkinglot.ParkingLot;
-import com.thoughtworks.parkinglot.domain.model.parkinglot.ParkingLotId;
-import com.thoughtworks.parkinglot.domain.model.parkinglot.ParkingLotRepository;
-import com.thoughtworks.parkinglot.domain.model.parkinglot.ParkingManager;
-import com.thoughtworks.parkinglot.domain.model.parkinglot.Ticket;
+import com.thoughtworks.parkinglot.domain.model.finder.Car;
+import com.thoughtworks.parkinglot.domain.model.finder.ParkingBoy;
+import com.thoughtworks.parkinglot.domain.model.finder.ParkingLot;
+import com.thoughtworks.parkinglot.domain.model.finder.ParkingLotId;
+import com.thoughtworks.parkinglot.domain.model.finder.ParkingLotRepository;
+import com.thoughtworks.parkinglot.domain.model.finder.ParkingManager;
+import com.thoughtworks.parkinglot.domain.model.finder.Ticket;
 import java.util.List;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -25,7 +25,7 @@ public class ParkingLotApplicationService {
 
     public Ticket parkByParkingBoy(final String parkingBoyName, final String licensePlate) {
         ParkingBoy parkingBoy = parkingBoyFactory.create(parkingBoyName);
-        ParkingLot parkingLot = parkingBoy.find().orElseThrow(NoEnoughCapacityException::new);
+        ParkingLot parkingLot = parkingBoy.findParkingLot().orElseThrow(NoEnoughCapacityException::new);
         return parkingLot.park(Car.of(licensePlate));
     }
 

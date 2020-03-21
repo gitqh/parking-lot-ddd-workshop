@@ -3,8 +3,8 @@ package com.thoughtworks.parkinglot.domain.model.parkingboy;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.verify;
 
-import com.thoughtworks.parkinglot.domain.model.parkinglot.ParkingBoy;
-import com.thoughtworks.parkinglot.domain.model.parkinglot.ParkingStrategy;
+import com.thoughtworks.parkinglot.domain.model.finder.ParkingBoy;
+import com.thoughtworks.parkinglot.domain.model.finder.ParkingStrategy;
 import org.assertj.core.util.Lists;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -20,7 +20,7 @@ public class ParkingBoyTest {
     @Test
     public void should_find_parking_lot_use_parking_strategy() {
         final ParkingBoy parkingBoy = ParkingBoy.of("Allen", Lists.newArrayList(), parkingStrategy);
-        parkingBoy.find();
+        parkingBoy.findParkingLot();
 
         verify(parkingStrategy).findParkingLotToPark(any());
     }

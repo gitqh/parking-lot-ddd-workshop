@@ -8,7 +8,7 @@ import com.google.common.collect.ImmutableList;
 import com.thoughtworks.parkinglot.domain.model.parkingconfig.ParkingManagerConfig;
 import com.thoughtworks.parkinglot.domain.model.parkingconfig.ParkingManagerConfigId;
 import com.thoughtworks.parkinglot.domain.model.parkingconfig.ParkingManagerConfigRepository;
-import com.thoughtworks.parkinglot.domain.model.parkinglot.ParkingManager;
+import com.thoughtworks.parkinglot.domain.model.finder.ParkingManager;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;

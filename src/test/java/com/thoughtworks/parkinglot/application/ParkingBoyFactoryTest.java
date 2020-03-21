@@ -8,13 +8,13 @@ import static org.mockito.BDDMockito.given;
 import com.google.common.collect.ImmutableList;
 import com.thoughtworks.parkinglot.config.SpringContextConfig;
 import com.thoughtworks.parkinglot.domain.model.parkingconfig.ParkingBoyConfig;
-import com.thoughtworks.parkinglot.domain.model.parkingconfig.ParkingBoyConfigId;
+import com.thoughtworks.parkinglot.domain.model.parkingconfig.ParkingBoyId;
 import com.thoughtworks.parkinglot.domain.model.parkingconfig.ParkingBoyConfigRepository;
 import com.thoughtworks.parkinglot.domain.model.parkingconfig.ParkingStrategyName;
 import com.thoughtworks.parkinglot.domain.model.strategy.JuniorParkingStrategy;
-import com.thoughtworks.parkinglot.domain.model.parkinglot.ParkingBoy;
-import com.thoughtworks.parkinglot.domain.model.parkinglot.ParkingLotRepository;
-import com.thoughtworks.parkinglot.domain.model.parkinglot.ParkingStrategy;
+import com.thoughtworks.parkinglot.domain.model.finder.ParkingBoy;
+import com.thoughtworks.parkinglot.domain.model.finder.ParkingLotRepository;
+import com.thoughtworks.parkinglot.domain.model.finder.ParkingStrategy;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -36,7 +36,7 @@ public class ParkingBoyFactoryTest {
     @Before
     public void setUp() {
         parkingBoyConfig = ParkingBoyConfig.of(
-                new ParkingBoyConfigId("BOY001"),
+                new ParkingBoyId("BOY001"),
                 "Allen",
                 ImmutableList.of(),
                 ParkingStrategyName.of("NaturalParkingStrategy"));
@@ -72,7 +72,7 @@ public class ParkingBoyFactoryTest {
                 parkingStrategy
         );
 
-        final ParkingBoy parkingBoy = parkingBoyFactory.create(new ParkingBoyConfigId("BOY001"));
+        final ParkingBoy parkingBoy = parkingBoyFactory.create(new ParkingBoyId("BOY001"));
 
         assertThat(parkingBoy).isEqualTo(expectedParkingBoy);
     }

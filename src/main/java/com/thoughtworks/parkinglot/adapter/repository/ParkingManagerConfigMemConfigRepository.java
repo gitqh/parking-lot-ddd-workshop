@@ -3,7 +3,7 @@ package com.thoughtworks.parkinglot.adapter.repository;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
 import com.thoughtworks.parkinglot.domain.exception.ParkingManagerNotFoundException;
-import com.thoughtworks.parkinglot.domain.model.parkingconfig.ParkingBoyConfigId;
+import com.thoughtworks.parkinglot.domain.model.parkingconfig.ParkingBoyId;
 import com.thoughtworks.parkinglot.domain.model.parkingconfig.ParkingManagerConfig;
 import com.thoughtworks.parkinglot.domain.model.parkingconfig.ParkingManagerConfigId;
 import com.thoughtworks.parkinglot.domain.model.parkingconfig.ParkingManagerConfigRepository;
@@ -23,8 +23,8 @@ public class ParkingManagerConfigMemConfigRepository implements ParkingManagerCo
         defaultParkingManager = ParkingManagerConfig.of(new ParkingManagerConfigId("MANAGER001"),
                 "Ross",
                 ImmutableList.of(
-                        new ParkingBoyConfigId("BOY001"),
-                        new ParkingBoyConfigId("BOY002")
+                        new ParkingBoyId("BOY001"),
+                        new ParkingBoyId("BOY002")
                 )
         );
 
@@ -32,8 +32,8 @@ public class ParkingManagerConfigMemConfigRepository implements ParkingManagerCo
         ParkingManagerConfig ted = ParkingManagerConfig.of(new ParkingManagerConfigId("MANAGER002"),
                 "Ted",
                 ImmutableList.of(
-                        new ParkingBoyConfigId("BOY003"),
-                        new ParkingBoyConfigId("BOY004")
+                        new ParkingBoyId("BOY003"),
+                        new ParkingBoyId("BOY004")
                 )
         );
 

@@ -1,9 +1,9 @@
 package com.thoughtworks.parkinglot.adapter.repository;
 
 import com.google.common.collect.ImmutableList;
-import com.thoughtworks.parkinglot.domain.model.parkinglot.ParkingLot;
-import com.thoughtworks.parkinglot.domain.model.parkinglot.ParkingLotId;
-import com.thoughtworks.parkinglot.domain.model.parkinglot.ParkingLotRepository;
+import com.thoughtworks.parkinglot.domain.model.finder.ParkingLot;
+import com.thoughtworks.parkinglot.domain.model.finder.ParkingLotId;
+import com.thoughtworks.parkinglot.domain.model.finder.ParkingLotRepository;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;

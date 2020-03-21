@@ -1,4 +1,4 @@
-package com.thoughtworks.parkinglot.domain.model.parkinglot;
+package com.thoughtworks.parkinglot.domain.model.finder;
 
 import java.util.Collection;
 import java.util.Optional;

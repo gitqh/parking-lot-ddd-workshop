@@ -1,5 +1,6 @@
-package com.thoughtworks.parkinglot.domain.model.parkinglot;
+package com.thoughtworks.parkinglot.domain.model.finder;
 
+import com.thoughtworks.parkinglot.domain.model.parking.ParkingLotFinder;
 import java.util.Collection;
 import java.util.Optional;
 import lombok.AllArgsConstructor;
@@ -10,12 +11,13 @@ import lombok.Data;
  */
 @Data
 @AllArgsConstructor(staticName = "of")
-public class ParkingBoy {
+public class ParkingBoy implements ParkingLotFinder {
     private final String name;
     private final Collection<ParkingLot> parkingLots;
     private ParkingStrategy parkingStrategy;
 
-    public Optional<ParkingLot> find() {
+    @Override
+    public Optional<ParkingLot> findParkingLot() {
         return parkingStrategy.findParkingLotToPark(parkingLots);
     }
 }

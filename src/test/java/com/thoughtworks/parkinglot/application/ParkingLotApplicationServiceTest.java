@@ -5,13 +5,13 @@ import static org.mockito.BDDMockito.given;
 
 import com.thoughtworks.parkinglot.domain.exception.IllegalTicketException;
 import com.thoughtworks.parkinglot.domain.exception.NoEnoughCapacityException;
-import com.thoughtworks.parkinglot.domain.model.parkinglot.Car;
-import com.thoughtworks.parkinglot.domain.model.parkinglot.ParkingBoy;
-import com.thoughtworks.parkinglot.domain.model.parkinglot.ParkingLot;
-import com.thoughtworks.parkinglot.domain.model.parkinglot.ParkingLotId;
-import com.thoughtworks.parkinglot.domain.model.parkinglot.ParkingLotRepository;
-import com.thoughtworks.parkinglot.domain.model.parkinglot.ParkingManager;
-import com.thoughtworks.parkinglot.domain.model.parkinglot.Ticket;
+import com.thoughtworks.parkinglot.domain.model.finder.Car;
+import com.thoughtworks.parkinglot.domain.model.finder.ParkingBoy;
+import com.thoughtworks.parkinglot.domain.model.finder.ParkingLot;
+import com.thoughtworks.parkinglot.domain.model.finder.ParkingLotId;
+import com.thoughtworks.parkinglot.domain.model.finder.ParkingLotRepository;
+import com.thoughtworks.parkinglot.domain.model.finder.ParkingManager;
+import com.thoughtworks.parkinglot.domain.model.finder.Ticket;
 import java.util.List;
 import java.util.Optional;
 import org.junit.Before;
@@ -55,7 +55,7 @@ public class ParkingLotApplicationServiceTest {
         final String parkingBoyName = "Allen";
         final Ticket expectedTicket = Ticket.of(licensePlate, parkingLotId);
         given(parkingBoyFactory.create(parkingBoyName)).willReturn(parkingBoy);
-        given(parkingBoy.find()).willReturn(Optional.of(parkingLot));
+        given(parkingBoy.findParkingLot()).willReturn(Optional.of(parkingLot));
         given(parkingLot.park(Car.of(licensePlate))).willReturn(expectedTicket);
 
         Ticket actualTicket = parkingLotApplicationService.parkByParkingBoy(parkingBoyName, licensePlate);
@@ -68,7 +68,7 @@ public class ParkingLotApplicationServiceTest {
         final String licensePlate = "川A23456";
         final String parkingBoyName = "Allen";
         given(parkingBoyFactory.create(parkingBoyName)).willReturn(parkingBoy);
-        given(parkingBoy.find()).willReturn(Optional.empty());
+        given(parkingBoy.findParkingLot()).willReturn(Optional.empty());
 
         parkingLotApplicationService.parkByParkingBoy(parkingBoyName, licensePlate);
     }

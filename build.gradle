@@ -98,8 +98,6 @@ coverage {
             "**/config/**",
             "**/exception/**",
             "**/api/**",
-            "**/model/parkingboy/ParkingStrategyEnum.java",
-            "**/model/parkingboy/ParkingFactory.java",
             "**/Application.java"
     ]
     excludeClasses = [
@@ -111,8 +109,6 @@ coverage {
             "**/config/**",
             "**/exception/**",
             "**/api/**",
-            "**/model/parkingboy/ParkingStrategyEnum.java",
-            "**/model/parkingboy/ParkingFactory.java",
             "**/Application.java"
     ]
 }

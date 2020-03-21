@@ -6,8 +6,8 @@ import static org.mockito.Mockito.mock;
 
 import com.google.common.collect.ImmutableList;
 import com.thoughtworks.parkinglot.domain.model.strategy.JuniorParkingStrategy;
-import com.thoughtworks.parkinglot.domain.model.parkinglot.ParkingLot;
-import com.thoughtworks.parkinglot.domain.model.parkinglot.ParkingStrategy;
+import com.thoughtworks.parkinglot.domain.model.finder.ParkingLot;
+import com.thoughtworks.parkinglot.domain.model.finder.ParkingStrategy;
 import java.util.Optional;
 import org.junit.Before;
 import org.junit.Test;

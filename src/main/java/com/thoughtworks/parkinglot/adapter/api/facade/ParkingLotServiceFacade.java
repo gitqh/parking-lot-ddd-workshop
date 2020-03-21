@@ -10,7 +10,7 @@ import com.thoughtworks.parkinglot.adapter.api.facade.response.CarResponse;
 import com.thoughtworks.parkinglot.adapter.api.facade.response.ParkingLotIdResponse;
 import com.thoughtworks.parkinglot.adapter.api.facade.response.TicketResponse;
 import com.thoughtworks.parkinglot.application.ParkingLotApplicationService;
-import com.thoughtworks.parkinglot.domain.model.parkinglot.ParkingLotId;
+import com.thoughtworks.parkinglot.domain.model.finder.ParkingLotId;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 

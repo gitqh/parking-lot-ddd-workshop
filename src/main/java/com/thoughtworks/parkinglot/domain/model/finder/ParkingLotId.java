@@ -1,4 +1,4 @@
-package com.thoughtworks.parkinglot.domain.model.parkinglot;
+package com.thoughtworks.parkinglot.domain.model.finder;
 
 import com.thoughtworks.parkinglot.common.model.AbstractId;
 import lombok.Data;

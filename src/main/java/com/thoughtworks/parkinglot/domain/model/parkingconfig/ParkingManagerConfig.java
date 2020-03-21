@@ -12,5 +12,5 @@ import lombok.Getter;
 public class ParkingManagerConfig {
     private ParkingManagerConfigId id;
     private String name;
-    private List<ParkingBoyConfigId> parkingBoyConfigIds;
+    private List<ParkingBoyId> parkingBoyIds;
 }
