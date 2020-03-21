@@ -5,47 +5,26 @@ skinparam class {
     ArrowColor SeaGreen
 }
 
-package parkingconfig <<Aggregate>> {
-    class ParkingBoyConfig <<Entity>> <<Aggregate Root>> {
-        -ParkingBoyConfigId id
-        -String name
-        -List<ParkingLotId> parkingLotIds
-        -ParkingStrategyName parkingStrategyName
+package parking <<core>> {
+    interface FindParkingLotService <<Service>> {
+        ParkingLot findParkingLot(ParkingLotFinderSpecification)
     }
 
-    class ParkingManagerConfig <<Entity>> <<Aggregate Root>> {
-        -ParkingManagerConfigId id
-        -String name
-        -List<ParkingBoyConfigId> parkingBoyConfigIds
+    interface ParkingLotFinderSpecification {
+
     }
 
-    class ParkingStrategyName <<Value Object>> {
-        -String name
+    interface ParkingLotFinderFactory {
+        ParkingLotFinder newParkingManager()
+        ParkingLotFinder newParkingBoy(ParkingBoyId id)
     }
 
-    ParkingBoyConfig o-> ParkingStrategyName
-}
-
-
-package parkinglot <<Aggregate>> {
-
-    class ParkingBoy <<Value Object>> {
-        -String name
-        -List<ParkingLot> parkingLots
-        -ParkingStrategy parkingStrategy
-        --
-        +Optional<ParkingLot> find()
+    interface ParkingLotFinder {
+        ParkingLot findParkingLotToPark()
     }
 
-    class ParkingManager <<Value Object>> {
-        -String name
-        -List<ParkingBoy> parkingBoys
-        --
-        +List<ParkingLot> listParkingLotIds()
-        +Optional<ParkingLot> findParkingLot()
-    }
 
-    class ParkingLot <<Entity>> <<Aggregate Root>> {
+    class ParkingLot {
         -ParkingLotId id
         -Map<TicketId, Car> ticketToCarMap
         --
@@ -53,34 +32,69 @@ package parkinglot <<Aggregate>> {
         +Car pick(TicketId ticketId)
     }
 
-    class Ticket <<Value Object>> {
+    class Ticket {
         -String licensePlate
         -ParkingLotId parkingLotId
     }
 
-    class Car <<Value Object>> {
+    class Car {
         -String licensePlate
     }
 
-    interface ParkingStrategy {
-        Optional<ParkingLot> find(List<ParkingLot> parkingLots)
-    }
-
-    class NaturalParkingStrategy <<Value Object>> {
-        Optional<ParkingLot> find(List<ParkingLot> parkingLots)
-    }
-
-    class MaxSpaceParkingStrategy <<Value Object>> {
-        Optional<ParkingLot> find(List<ParkingLot> parkingLots)
-    }
-
-    ParkingLot "1" o-- "many" Ticket
+    ParkingLot "1" *--> "many" Ticket
     ParkingLot "1" -> "many" Car
-    ParkingManager "1" -> "many" ParkingBoy
-    ParkingBoy "1" -> "many" ParkingLot
-    NaturalParkingStrategy ..|> ParkingStrategy
-    MaxSpaceParkingStrategy ..|> ParkingStrategy
-    ParkingStrategy --> ParkingBoy
+    FindParkingLotService ..> ParkingLotFinderSpecification
+    ParkingLotFinderFactory ..> ParkingLotFinder
+}
+
+package finder {
+    class ParkingManagerSpecification {
+
+    }
+
+    class ParkingBoySpecification {
+        -ParkingBoyId parkingBoyId
+    }
+
+    class ParkingBoy {
+        -String name
+        -List<ParkingLot> parkingLots
+        -ParkingStrategy parkingStrategy
+        --
+        +Optional<ParkingLot> find()
+    }
+
+    class ParkingManager {
+        -String name
+        -List<ParkingBoy> parkingBoys
+        --
+        +List<ParkingLot> listParkingLotIds()
+        +Optional<ParkingLot> findParkingLot()
+    }
+
+    class ParkingStrategy {
+        +ParkingLot findParkingLotToPark(Collection<ParkingLot> parkingLots)
+    }
+
+    ParkingManagerSpecification --|> ParkingLotFinderSpecification
+    ParkingBoySpecification --|> ParkingLotFinderSpecification
+    ParkingManager --|> ParkingLotFinder
+    ParkingBoy --|> ParkingLotFinder
+    ParkingManager *--> ParkingBoy
+    ParkingBoy *--> ParkingStrategy
+}
+
+package strategy {
+    class SeniorParkingStrategy {
+        +ParkingLot findParkingLotToPark(Collection<ParkingLot> parkingLots)
+    }
+    
+    class JuniorParkingStrategy {
+        +ParkingLot findParkingLotToPark(Collection<ParkingLot> parkingLots)
+    }
+
+    SeniorParkingStrategy -|> ParkingStrategy
+    JuniorParkingStrategy -|> ParkingStrategy
 }
 
 @enduml
