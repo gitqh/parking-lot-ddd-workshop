@@ -22,6 +22,6 @@ public class ParkingBoyTest {
         final ParkingBoy parkingBoy = ParkingBoy.of("Allen", Lists.newArrayList(), parkingStrategy);
         parkingBoy.find();
 
-        verify(parkingStrategy).find(any());
+        verify(parkingStrategy).findParkingLotToPark(any());
     }
 }

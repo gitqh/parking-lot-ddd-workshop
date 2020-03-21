@@ -5,14 +5,14 @@ import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.mock;
 
 import com.google.common.collect.ImmutableList;
-import com.thoughtworks.parkinglot.domain.model.parkinglot.NaturalParkingStrategy;
+import com.thoughtworks.parkinglot.domain.model.strategy.SeniorParkingParkingStrategy;
 import com.thoughtworks.parkinglot.domain.model.parkinglot.ParkingLot;
 import com.thoughtworks.parkinglot.domain.model.parkinglot.ParkingStrategy;
 import java.util.Optional;
 import org.junit.Before;
 import org.junit.Test;
 
-public class NaturalParkingStrategyTest {
+public class SeniorParkingParkingStrategyTest {
     private ParkingStrategy parkingStrategy;
     private ParkingLot parkingLot1;
     private ParkingLot parkingLot2;
@@ -21,28 +21,31 @@ public class NaturalParkingStrategyTest {
     public void setUp() {
         parkingLot1 = mock(ParkingLot.class);
         parkingLot2 = mock(ParkingLot.class);
-        parkingStrategy = NaturalParkingStrategy.of();
+        parkingStrategy = SeniorParkingParkingStrategy.of();
     }
 
     @Test
-    public void should_return_1st_parking_lot_when_1st_is_available() {
+    public void should_return_2nd_when_2nd_has_most_space() {
         given(parkingLot1.isAvailable()).willReturn(true);
+        given(parkingLot1.getSpace()).willReturn(3);
+        given(parkingLot2.isAvailable()).willReturn(true);
+        given(parkingLot2.getSpace()).willReturn(5);
 
-        final Optional<ParkingLot> expectedParkingLot = parkingStrategy.find(
+        Optional<ParkingLot> expectedParkingLot = parkingStrategy.findParkingLotToPark(ImmutableList.of(
+                parkingLot1, parkingLot2));
+
+        assertThat(expectedParkingLot).containsSame(parkingLot2);
+    }
+
+    @Test
+    public void should_return_1st_parking_lot_when_2nd_is_not_available() {
+        given(parkingLot1.isAvailable()).willReturn(true);
+        given(parkingLot2.isAvailable()).willReturn(false);
+
+        final Optional<ParkingLot> expectedParkingLot = parkingStrategy.findParkingLotToPark(
                 ImmutableList.of(parkingLot1, parkingLot2));
 
         assertThat(expectedParkingLot).containsSame(parkingLot1);
-    }
-
-    @Test
-    public void should_return_2nd_parking_lot_when_1st_is_not_available() {
-        given(parkingLot1.isAvailable()).willReturn(false);
-        given(parkingLot2.isAvailable()).willReturn(true);
-
-        final Optional<ParkingLot> expectedParkingLot = parkingStrategy.find(
-                ImmutableList.of(parkingLot1, parkingLot2));
-
-        assertThat(expectedParkingLot).containsSame(parkingLot2);
     }
 
     @Test
@@ -50,7 +53,7 @@ public class NaturalParkingStrategyTest {
         given(parkingLot1.isAvailable()).willReturn(false);
         given(parkingLot2.isAvailable()).willReturn(false);
 
-        final Optional<ParkingLot> parkingLot = parkingStrategy.find(
+        final Optional<ParkingLot> parkingLot = parkingStrategy.findParkingLotToPark(
                 ImmutableList.of(parkingLot1, parkingLot2));
 
         assertThat(parkingLot).isEmpty();

@@ -4,7 +4,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.BDDMockito.given;
 
 import com.google.common.collect.ImmutableList;
-import com.thoughtworks.parkinglot.domain.model.parkinglot.NaturalParkingStrategy;
+import com.thoughtworks.parkinglot.domain.model.strategy.JuniorParkingStrategy;
 import com.thoughtworks.parkinglot.domain.model.parkinglot.ParkingBoy;
 import com.thoughtworks.parkinglot.domain.model.parkinglot.ParkingLot;
 import com.thoughtworks.parkinglot.domain.model.parkinglot.ParkingLotId;
@@ -39,10 +39,10 @@ public class ParkingManagerTest {
         final List<ParkingBoy> parkingBoys = ImmutableList.of(
                 ParkingBoy.of("Allen",
                         ImmutableList.of(ParkingLot.of(new ParkingLotId("LOT001"), 1, Collections.emptyMap())),
-                    NaturalParkingStrategy.of()),
+                    JuniorParkingStrategy.of()),
         ParkingBoy.of("Booker",
                 ImmutableList.of(ParkingLot.of(new ParkingLotId("LOT002"), 1, Collections.emptyMap())),
-                NaturalParkingStrategy.of())
+                JuniorParkingStrategy.of())
         );
         final List<ParkingLotId> expectedIds = Arrays.asList(new ParkingLotId("LOT001"), new ParkingLotId("LOT002"));
         final ParkingManager parkingManager = ParkingManager.of("", parkingBoys);

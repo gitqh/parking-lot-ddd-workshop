@@ -11,7 +11,7 @@ import com.thoughtworks.parkinglot.domain.model.parkingconfig.ParkingBoyConfig;
 import com.thoughtworks.parkinglot.domain.model.parkingconfig.ParkingBoyConfigId;
 import com.thoughtworks.parkinglot.domain.model.parkingconfig.ParkingBoyConfigRepository;
 import com.thoughtworks.parkinglot.domain.model.parkingconfig.ParkingStrategyName;
-import com.thoughtworks.parkinglot.domain.model.parkinglot.NaturalParkingStrategy;
+import com.thoughtworks.parkinglot.domain.model.strategy.JuniorParkingStrategy;
 import com.thoughtworks.parkinglot.domain.model.parkinglot.ParkingBoy;
 import com.thoughtworks.parkinglot.domain.model.parkinglot.ParkingLotRepository;
 import com.thoughtworks.parkinglot.domain.model.parkinglot.ParkingStrategy;
@@ -46,7 +46,7 @@ public class ParkingBoyFactoryTest {
 
     @Test
     public void should_return_boy_by_name() {
-        final ParkingStrategy parkingStrategy = NaturalParkingStrategy.of();
+        final ParkingStrategy parkingStrategy = JuniorParkingStrategy.of();
         given(parkingBoyConfigRepository.findByName(any())).willReturn(parkingBoyConfig);
 
         PowerMockito.when(SpringContextConfig.getBean(any())).thenReturn(parkingStrategy);
@@ -63,7 +63,7 @@ public class ParkingBoyFactoryTest {
 
     @Test
     public void should_return_boy_by_id() {
-        final ParkingStrategy parkingStrategy = NaturalParkingStrategy.of();
+        final ParkingStrategy parkingStrategy = JuniorParkingStrategy.of();
         given(parkingBoyConfigRepository.findById(any())).willReturn(parkingBoyConfig);
         PowerMockito.when(SpringContextConfig.getBean(any())).thenReturn(parkingStrategy);
         final ParkingBoy expectedParkingBoy = ParkingBoy.of(
