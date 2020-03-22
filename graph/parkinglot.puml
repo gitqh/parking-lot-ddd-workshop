@@ -59,7 +59,7 @@ package finder {
     class ParkingBoy {
         -String name
         -List<ParkingLot> parkingLots
-        -ParkingStrategy parkingStrategy
+        -ParkingPolicy parkingPolicy
         --
         +Optional<ParkingLot> find()
     }
@@ -72,7 +72,7 @@ package finder {
         +Optional<ParkingLot> findParkingLot()
     }
 
-    class ParkingStrategy {
+    class ParkingPolicy {
         +ParkingLot findParkingLotToPark(Collection<ParkingLot> parkingLots)
     }
 
@@ -81,20 +81,20 @@ package finder {
     ParkingManager --|> ParkingLotFinder
     ParkingBoy --|> ParkingLotFinder
     ParkingManager *--> ParkingBoy
-    ParkingBoy *--> ParkingStrategy
+    ParkingBoy *--> ParkingPolicy
 }
 
-package strategy {
-    class SeniorParkingStrategy {
+package Policy {
+    class SeniorParkingPolicy {
         +ParkingLot findParkingLotToPark(Collection<ParkingLot> parkingLots)
     }
     
-    class JuniorParkingStrategy {
+    class JuniorParkingPolicy {
         +ParkingLot findParkingLotToPark(Collection<ParkingLot> parkingLots)
     }
 
-    SeniorParkingStrategy -|> ParkingStrategy
-    JuniorParkingStrategy -|> ParkingStrategy
+    SeniorParkingPolicy -|> ParkingPolicy
+    JuniorParkingPolicy -|> ParkingPolicy
 }
 
 @enduml
