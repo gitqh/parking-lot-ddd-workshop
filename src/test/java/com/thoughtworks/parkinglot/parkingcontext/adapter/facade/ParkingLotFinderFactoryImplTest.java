@@ -1,4 +1,4 @@
-package com.thoughtworks.parkinglot.parkingcontext.domain.finder;
+package com.thoughtworks.parkinglot.parkingcontext.adapter.facade;
 
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -12,7 +12,11 @@ import com.thoughtworks.parkinglot.configcontext.domain.ParkingBoyRepository;
 import com.thoughtworks.parkinglot.configcontext.domain.ParkingManagerId;
 import com.thoughtworks.parkinglot.configcontext.domain.ParkingManagerRepository;
 import com.thoughtworks.parkinglot.configcontext.domain.ParkingPolicyName;
-import com.thoughtworks.parkinglot.parkingcontext.adapter.repository.ParkingLotFinderFactoryImpl;
+import com.thoughtworks.parkinglot.parkingcontext.adapter.api.facade.ParkingLotFinderFactoryImpl;
+import com.thoughtworks.parkinglot.parkingcontext.domain.finder.ParkingBoy;
+import com.thoughtworks.parkinglot.parkingcontext.domain.finder.ParkingLotRepository;
+import com.thoughtworks.parkinglot.parkingcontext.domain.finder.ParkingManager;
+import com.thoughtworks.parkinglot.parkingcontext.domain.finder.ParkingPolicy;
 import com.thoughtworks.parkinglot.parkingcontext.domain.policy.JuniorParkingPolicy;
 import org.junit.Before;
 import org.junit.Test;
@@ -60,7 +64,7 @@ public class ParkingLotFinderFactoryImplTest {
         );
 
         final com.thoughtworks.parkinglot.parkingcontext.domain.finder.ParkingBoy parkingBoy =
-                (ParkingBoy) parkingLotFinderFactoryImpl.newParkingBoy(new ParkingBoyId("BOY001"));
+                (ParkingBoy) parkingLotFinderFactoryImpl.newParkingBoy("BOY001");
 
         assertThat(parkingBoy).isEqualTo(expectedParkingBoy);
     }
@@ -78,7 +82,7 @@ public class ParkingLotFinderFactoryImplTest {
         );
 
         final com.thoughtworks.parkinglot.parkingcontext.domain.finder.ParkingBoy parkingBoy =
-                (ParkingBoy) parkingLotFinderFactoryImpl.newParkingBoy(new ParkingBoyId("BOY001"));
+                (ParkingBoy) parkingLotFinderFactoryImpl.newParkingBoy("BOY001");
 
         assertThat(parkingBoy).isEqualTo(expectedParkingBoy);
     }

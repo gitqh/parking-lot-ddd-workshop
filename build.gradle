@@ -89,6 +89,14 @@ application {
     mainClassName = "com.thoughtworks.parkinglot.Application"
 }
 
+bootJar {
+    enabled = false
+}
+
+jar {
+    enabled = true
+}
+
 coverage {
     excludePackages = [
             "**/dto/**",

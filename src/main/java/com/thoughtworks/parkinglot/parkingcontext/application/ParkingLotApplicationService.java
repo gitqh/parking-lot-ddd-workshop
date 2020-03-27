@@ -1,6 +1,7 @@
 package com.thoughtworks.parkinglot.parkingcontext.application;
 
 import com.thoughtworks.parkinglot.parkingcontext.domain.exception.IllegalTicketException;
+import com.thoughtworks.parkinglot.parkingcontext.domain.exception.NoEnoughCapacityException;
 import com.thoughtworks.parkinglot.parkingcontext.domain.finder.ParkingBoySpecification;
 import com.thoughtworks.parkinglot.parkingcontext.domain.finder.ParkingLotId;
 import com.thoughtworks.parkinglot.parkingcontext.domain.finder.ParkingLotRepository;
@@ -26,13 +27,15 @@ public class ParkingLotApplicationService {
 
     public Ticket parkByParkingBoy(final String parkingBoyId, final String licensePlate) {
         var parkingLotFinderSpecification = new ParkingBoySpecification(parkingBoyId, parkingLotFinderFactory);
-        var parkingLot = finderParkingLotService.findParkingLot(parkingLotFinderSpecification);
+        var parkingLot = finderParkingLotService.findParkingLot(parkingLotFinderSpecification)
+                .orElseThrow(NoEnoughCapacityException::new);
         return parkingLot.park(Car.of(licensePlate));
     }
 
     public Ticket parkByParkingManager(final String licensePlate) {
         var parkingLotFinderSpecification = new ParkingManagerSpecification(parkingLotFinderFactory);
-        var parkingLot = finderParkingLotService.findParkingLot(parkingLotFinderSpecification);
+        var parkingLot = finderParkingLotService.findParkingLot(parkingLotFinderSpecification)
+                .orElseThrow(NoEnoughCapacityException::new);
         return parkingLot.park(Car.of(licensePlate));
     }
 

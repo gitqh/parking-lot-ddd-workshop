@@ -11,7 +11,7 @@ import com.thoughtworks.parkinglot.parkingcontext.domain.finder.ParkingLotReposi
 import com.thoughtworks.parkinglot.parkingcontext.domain.finder.ParkingManager;
 import com.thoughtworks.parkinglot.parkingcontext.domain.parking.Car;
 import com.thoughtworks.parkinglot.parkingcontext.domain.parking.FinderParkingLotService;
-import com.thoughtworks.parkinglot.parkingcontext.adapter.repository.ParkingLotFinderFactoryImpl;
+import com.thoughtworks.parkinglot.parkingcontext.domain.parking.ParkingLotFinderFactory;
 import java.util.List;
 import java.util.Optional;
 import org.junit.Before;
@@ -26,7 +26,7 @@ public class ParkingLotApplicationServiceTest {
     @Mock
     private ParkingLotRepository parkingLotRepository;
     @Mock
-    private ParkingLotFinderFactoryImpl parkingLotFinderFactoryImpl;
+    private ParkingLotFinderFactory parkingLotFinderFactory;
     @Mock
     private ParkingLot parkingLot;
     @Mock
@@ -45,7 +45,7 @@ public class ParkingLotApplicationServiceTest {
     @Before
     public void setUp() {
         parkingLotId = new ParkingLotId("LOT001");
-        parkingLotApplicationService = new ParkingLotApplicationService(parkingLotFinderFactoryImpl,
+        parkingLotApplicationService = new ParkingLotApplicationService(parkingLotFinderFactory,
                 parkingLotRepository,
                 finderParkingLotService
         );
@@ -111,7 +111,7 @@ public class ParkingLotApplicationServiceTest {
 
     @Test
     public void should_return_parkingLotIds() {
-        given(parkingLotFinderFactoryImpl.newParkingManager()).willReturn(parkingManager);
+        given(parkingLotFinderFactory.newParkingManager()).willReturn(parkingManager);
         given(parkingManager.listParkingLotIds()).willReturn(parkingLotIds);
 
         List<ParkingLotId> actualParkingLotIds = parkingLotApplicationService.listsParkingLotWithSpace();

@@ -1,7 +1,7 @@
 package com.thoughtworks.parkinglot.parkingcontext.domain.finder;
 
 import com.thoughtworks.parkinglot.annotation.ValueObject;
-import com.thoughtworks.parkinglot.parkingcontext.domain.exception.NoEnoughCapacityException;
+import com.thoughtworks.parkinglot.parkingcontext.domain.parking.ParkingLotFinder;
 import com.thoughtworks.parkinglot.parkingcontext.domain.parking.ParkingLotFinderFactory;
 import com.thoughtworks.parkinglot.parkingcontext.domain.parking.ParkingLotFinderSpecification;
 import lombok.AllArgsConstructor;
@@ -15,8 +15,7 @@ public class ParkingManagerSpecification implements ParkingLotFinderSpecificatio
     private final ParkingLotFinderFactory parkingLotFinderFactory;
 
     @Override
-    public ParkingLot findParkingLot() {
-        var parkingManager = parkingLotFinderFactory.newParkingManager();
-        return parkingManager.findParkingLot().orElseThrow(NoEnoughCapacityException::new);
+    public ParkingLotFinder findParkingLotFinder() {
+        return parkingLotFinderFactory.newParkingManager();
     }
 }
