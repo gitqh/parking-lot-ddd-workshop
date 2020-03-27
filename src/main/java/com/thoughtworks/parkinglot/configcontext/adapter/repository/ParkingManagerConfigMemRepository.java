@@ -1,4 +1,4 @@
-package com.thoughtworks.parkinglot.parkingcontext.adapter.repository;
+package com.thoughtworks.parkinglot.configcontext.adapter.repository;
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;

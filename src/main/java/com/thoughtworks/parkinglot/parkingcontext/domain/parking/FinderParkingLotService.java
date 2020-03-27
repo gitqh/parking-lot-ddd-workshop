@@ -1,9 +1,11 @@
 package com.thoughtworks.parkinglot.parkingcontext.domain.parking;
 
 import com.thoughtworks.parkinglot.parkingcontext.domain.finder.ParkingLot;
+import org.springframework.stereotype.Service;
 
-public interface FinderParkingLotService {
-    default ParkingLot findParkingLot(ParkingLotFinderSpecification parkingLotFinderSpecification) {
+@Service
+public class FinderParkingLotService {
+    public ParkingLot findParkingLot(final ParkingLotFinderSpecification parkingLotFinderSpecification) {
         return parkingLotFinderSpecification.findParkingLot();
     }
 }

@@ -1,0 +1,100 @@
+@startuml parkinglot
+skinparam Shadowing false
+skinparam class {
+    BackgroundColor PaleTurquoise 
+    ArrowColor SeaGreen
+}
+
+package parkingcontext <<Core SubDomain>> {
+    package parking {
+        interface FindParkingLotService {
+            ParkingLot findParkingLot(ParkingLotFinderSpecification)
+        }
+        interface ParkingLotFinderSpecification {
+            ParkingLotFinder newParkingLotFinder()
+        }
+        interface ParkingLotFinder {
+            ParkingLot findParkingLotToPark()
+        }
+        class ParkingLot <<Entity>> <<Aggregate>> {
+            -ParkingLotId id
+            -Map<TicketId, Car> ticketToCarMap
+            --
+            +Ticket park(Car car)
+            +Car pick(TicketId ticketId)
+        }
+        class Ticket <<Value Object>> {
+            -String licensePlate
+            -ParkingLotId parkingLotId
+        }
+        class Car <<Value Object>> {
+            -String licensePlate
+        }
+        FindParkingLotService .down.> ParkingLotFinderSpecification
+        ParkingLot "1" *-down-> "many" Ticket
+        ParkingLot "1" -right-> "many" Car
+        ParkingLot --left[hidden] Car
+    }
+
+    package finder {
+        class ParkingManagerSpecification {
+            +ParkingLotFinder newParkingLotFinder()
+        }
+        class ParkingBoySpecification {
+            -ParkingBoyId parkingBoyId
+            --
+            +ParkingLotFinder newParkingLotFinder()
+        }
+        class ParkingBoy {
+            -String name
+            -List<ParkingLot> parkingLots
+            -ParkingPolicy parkingPolicy
+            --
+            +Optional<ParkingLot> find()
+        }
+        class ParkingManager {
+            -String name
+            -List<ParkingBoy> parkingBoys
+            --
+            +List<ParkingLot> listParkingLotIds()
+            +Optional<ParkingLot> findParkingLot()
+        }
+        class ParkingPolicy {
+            +ParkingLot findParkingLotToPark(Collection<ParkingLot> parkingLots)
+        }
+        ParkingManagerSpecification -up-|> ParkingLotFinderSpecification
+        ParkingBoySpecification -up-|> ParkingLotFinderSpecification
+        ParkingManager -up-|> ParkingLotFinder
+        ParkingBoy -up-|> ParkingLotFinder
+        ParkingManager *-left-> ParkingBoy
+        ParkingBoy *--> ParkingPolicy
+    }
+
+    package policy {
+        class SeniorParkingPolicy {
+            +ParkingLot findParkingLotToPark(Collection<ParkingLot> parkingLots)
+        }
+        class JuniorParkingPolicy {
+            +ParkingLot findParkingLotToPark(Collection<ParkingLot> parkingLots)
+        }
+        SeniorParkingPolicy -up-|> ParkingPolicy
+        JuniorParkingPolicy -up-|> ParkingPolicy
+    }
+}
+
+namespace configcontext <<Config SubDomain>> {
+  class ParkingManager <<Entity>> <<Aggregate Root>> {
+     ParkingManagerId id
+     List<ParkingBoyId> parkingBoyIds
+  }
+  class ParkingBoy <<Entity>> <<Aggregate Root>> {
+    ParkingBoyId id
+    List<ParkingLotId> parkingLotIds
+    ParkingStrategyName parkingStrategyName
+  }
+  enum ParkingStrategyName
+  ParkingBoy --> ParkingStrategyName
+  ParkingManager --[hidden] ParkingBoy
+}
+
+@enduml

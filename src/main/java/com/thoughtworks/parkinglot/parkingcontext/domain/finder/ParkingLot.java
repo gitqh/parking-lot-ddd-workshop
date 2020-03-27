@@ -32,13 +32,13 @@ public class ParkingLot {
         if (!isAvailable()) {
             throw new NoEnoughCapacityException();
         }
-        final Ticket ticket = Ticket.of(car.getLicensePlate(), id);
+        var ticket = Ticket.of(car.getLicensePlate(), id);
         ticketToCar.put(car.getLicensePlate(), car);
         return ticket;
     }
 
     public Car pick(final String licensePlate) {
-        final Car car = ticketToCar.get(licensePlate);
+        var car = ticketToCar.get(licensePlate);
         if (car == null) {
             throw new IllegalTicketException();
         }

@@ -6,13 +6,13 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
 
 import com.google.common.collect.ImmutableList;
-import com.thoughtworks.parkinglot.config.SpringContextConfig;
+import com.thoughtworks.parkinglot.common.config.SpringContextConfig;
 import com.thoughtworks.parkinglot.configcontext.domain.ParkingBoyId;
 import com.thoughtworks.parkinglot.configcontext.domain.ParkingBoyRepository;
 import com.thoughtworks.parkinglot.configcontext.domain.ParkingManagerId;
 import com.thoughtworks.parkinglot.configcontext.domain.ParkingManagerRepository;
 import com.thoughtworks.parkinglot.configcontext.domain.ParkingPolicyName;
-import com.thoughtworks.parkinglot.parkingcontext.domain.parking.ParkingLotFinderFactory;
+import com.thoughtworks.parkinglot.parkingcontext.adapter.repository.ParkingLotFinderFactoryImpl;
 import com.thoughtworks.parkinglot.parkingcontext.domain.policy.JuniorParkingPolicy;
 import org.junit.Before;
 import org.junit.Test;
@@ -24,7 +24,7 @@ import org.powermock.modules.junit4.PowerMockRunner;
 
 @RunWith(PowerMockRunner.class)
 @PrepareForTest(SpringContextConfig.class)
-public class ParkingLotFinderFactoryTest {
+public class ParkingLotFinderFactoryImplTest {
     @Mock
     private ParkingBoyRepository parkingBoyRepository;
     @Mock
@@ -32,7 +32,7 @@ public class ParkingLotFinderFactoryTest {
     @Mock
     private ParkingLotRepository parkingLotRepository;
     private com.thoughtworks.parkinglot.configcontext.domain.ParkingBoy parkingBoy;
-    private ParkingLotFinderFactory parkingLotFinderFactory;
+    private ParkingLotFinderFactoryImpl parkingLotFinderFactoryImpl;
 
     @Before
     public void setUp() {
@@ -41,7 +41,7 @@ public class ParkingLotFinderFactoryTest {
                 "Allen",
                 ImmutableList.of(),
                 ParkingPolicyName.of("NaturalParkingStrategy"));
-        parkingLotFinderFactory = new ParkingLotFinderFactory(
+        parkingLotFinderFactoryImpl = new ParkingLotFinderFactoryImpl(
                 parkingBoyRepository, parkingManagerRepository, parkingLotRepository);
         PowerMockito.mockStatic(SpringContextConfig.class);
     }
@@ -60,7 +60,7 @@ public class ParkingLotFinderFactoryTest {
         );
 
         final com.thoughtworks.parkinglot.parkingcontext.domain.finder.ParkingBoy parkingBoy =
-                (ParkingBoy) parkingLotFinderFactory.newParkingBoy(new ParkingBoyId("BOY001"));
+                (ParkingBoy) parkingLotFinderFactoryImpl.newParkingBoy(new ParkingBoyId("BOY001"));
 
         assertThat(parkingBoy).isEqualTo(expectedParkingBoy);
     }
@@ -78,7 +78,7 @@ public class ParkingLotFinderFactoryTest {
         );
 
         final com.thoughtworks.parkinglot.parkingcontext.domain.finder.ParkingBoy parkingBoy =
-                (ParkingBoy) parkingLotFinderFactory.newParkingBoy(new ParkingBoyId("BOY001"));
+                (ParkingBoy) parkingLotFinderFactoryImpl.newParkingBoy(new ParkingBoyId("BOY001"));
 
         assertThat(parkingBoy).isEqualTo(expectedParkingBoy);
     }
@@ -94,7 +94,7 @@ public class ParkingLotFinderFactoryTest {
         given(parkingManagerRepository.findDefault()).willReturn(parkingManager);
         final com.thoughtworks.parkinglot.parkingcontext.domain.finder.ParkingManager expectedManager = com.thoughtworks.parkinglot.parkingcontext.domain.finder.ParkingManager.of("Ross", ImmutableList.of());
 
-        final com.thoughtworks.parkinglot.parkingcontext.domain.finder.ParkingManager actualManager = (ParkingManager) parkingLotFinderFactory.newParkingManager();
+        final com.thoughtworks.parkinglot.parkingcontext.domain.finder.ParkingManager actualManager = (ParkingManager) parkingLotFinderFactoryImpl.newParkingManager();
 
         assertThat(actualManager).isEqualTo(expectedManager);
     }

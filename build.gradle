@@ -39,7 +39,8 @@ repositories {
 
 group = "com.thoughtworks.parkinglot"
 version = "1.0.0-SNAPSHOT"
-sourceCompatibility = JavaVersion.VERSION_1_8
+sourceCompatibility = JavaVersion.VERSION_11
+targetCompatibility = JavaVersion.VERSION_11
 
 ext {
     springBootVersion = "2.2.5.RELEASE"

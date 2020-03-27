@@ -13,7 +13,7 @@ import org.springframework.stereotype.Component;
 public class ParkingLotIdMapper {
 
     public ParkingLotIdResponse to(final List<ParkingLotId> parkingLotIds) {
-        List<String> parkingLotIdStrings = parkingLotIds.stream()
+        var parkingLotIdStrings = parkingLotIds.stream()
                 .map(ParkingLotId::getValue)
                 .collect(Collectors.toList());
         return ParkingLotIdResponse.of(parkingLotIdStrings);

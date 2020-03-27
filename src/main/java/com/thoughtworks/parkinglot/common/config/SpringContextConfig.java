@@ -1,4 +1,4 @@
-package com.thoughtworks.parkinglot.config;
+package com.thoughtworks.parkinglot.common.config;
 
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;

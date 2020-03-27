@@ -1,4 +1,4 @@
-package com.thoughtworks.parkinglot.config;
+package com.thoughtworks.parkinglot.common.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
