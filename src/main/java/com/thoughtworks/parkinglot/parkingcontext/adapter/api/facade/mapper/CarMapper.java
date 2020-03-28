@@ -2,15 +2,15 @@ package com.thoughtworks.parkinglot.parkingcontext.adapter.api.facade.mapper;
 
 import com.thoughtworks.parkinglot.parkingcontext.adapter.api.facade.response.CarResponse;
 import com.thoughtworks.parkinglot.parkingcontext.domain.parking.Car;
-import org.springframework.stereotype.Component;
+import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
 
 /**
  * @author gitqh
  */
-@Component
-public class CarMapper {
+@Mapper
+public interface CarMapper {
 
-    public CarResponse to(final Car car) {
-        return CarResponse.of(car.getLicensePlate());
-    }
+    @Mapping(source = "licensePlate", target = "carLicensePlate")
+    CarResponse to(Car car);
 }

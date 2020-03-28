@@ -1,11 +1,15 @@
 package com.thoughtworks.parkinglot.parkingcontext.adapter.api.facade.response;
 
-import lombok.Value;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
  * @author gitqh
  */
-@Value(staticConstructor = "of")
+@AllArgsConstructor(staticName = "of")
+@NoArgsConstructor
+@Data
 public class CarResponse {
-    private final String carLicensePlate;
+    private String carLicensePlate;
 }

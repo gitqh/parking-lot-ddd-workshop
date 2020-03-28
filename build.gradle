@@ -29,6 +29,7 @@ plugins {
 }
 
 apply plugin: "io.spring.dependency-management"
+apply plugin: 'net.ltgt.apt-idea'
 apply from: "$rootDir/gradle/config/scripts/idea.gradle"
 
 repositories {
@@ -65,8 +66,8 @@ dependencies {
     implementation "io.springfox:springfox-swagger-ui:$springfoxVersion"
     runtimeOnly "mysql:mysql-connector-java"
     runtimeOnly "com.h2database:h2"
-//    compileOnly("org.mapst ruct:mapstruct-jdk8:$mapstructVersion")
-//    annotationProcessor("org.mapstruct:mapstruct-processor:$mapstructVersion")
+    implementation("org.mapstruct:mapstruct:$mapstructVersion")
+    annotationProcessor("org.mapstruct:mapstruct-processor:$mapstructVersion")
     compileOnly "org.projectlombok:lombok:$lombokVersion"
     annotationProcessor "org.projectlombok:lombok:$lombokVersion"
 
@@ -95,6 +96,14 @@ bootJar {
 
 jar {
     enabled = true
+}
+
+compileJava {
+    options.compilerArgs = [
+            '-Amapstruct.suppressGeneratorTimestamp=true',
+            '-Amapstruct.suppressGeneratorVersionInfoComment=true',
+            '-Amapstruct.defaultComponentModel=spring'
+    ]
 }
 
 coverage {

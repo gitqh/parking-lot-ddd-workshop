@@ -4,8 +4,6 @@ import com.thoughtworks.parkinglot.parkingcontext.adapter.api.facade.dto.Parking
 import com.thoughtworks.parkinglot.parkingcontext.adapter.api.facade.dto.ParkingWithParkingManagerDTO;
 import com.thoughtworks.parkinglot.parkingcontext.adapter.api.facade.dto.PickingDTO;
 import com.thoughtworks.parkinglot.parkingcontext.adapter.api.facade.mapper.CarMapper;
-import com.thoughtworks.parkinglot.parkingcontext.adapter.api.facade.mapper.ParkingLotIdMapper;
-import com.thoughtworks.parkinglot.parkingcontext.adapter.api.facade.mapper.TicketMapper;
 import com.thoughtworks.parkinglot.parkingcontext.adapter.api.facade.response.CarResponse;
 import com.thoughtworks.parkinglot.parkingcontext.adapter.api.facade.response.ParkingLotIdResponse;
 import com.thoughtworks.parkinglot.parkingcontext.adapter.api.facade.response.TicketResponse;
@@ -22,22 +20,20 @@ import org.springframework.stereotype.Service;
 public class ParkingLotServiceFacade {
     private final ParkingLotApplicationService parkingLotApplicationService;
     private final CarMapper carMapper;
-    private final TicketMapper ticketMapper;
-    private final ParkingLotIdMapper parkingLotIdMapper;
 
     public TicketResponse parkWithParkingBoy(final ParkingWithParkingBoyDTO parkingWithParkingBoyDTO) {
-        return ticketMapper.to(parkingLotApplicationService
+        return TicketResponse.to(parkingLotApplicationService
                 .parkByParkingBoy(parkingWithParkingBoyDTO.getParkingBoyId(),
                         parkingWithParkingBoyDTO.getLicensePlate()));
     }
 
     public TicketResponse parkWithParkingManager(final ParkingWithParkingManagerDTO parkingWithParkingManagerDTO) {
-        return ticketMapper.to(parkingLotApplicationService
+        return TicketResponse.to(parkingLotApplicationService
                 .parkByParkingManager(parkingWithParkingManagerDTO.getLicensePlate()));
     }
 
     public ParkingLotIdResponse listsParkingLotWithSpace() {
-        return parkingLotIdMapper.to(parkingLotApplicationService.listsParkingLotWithSpace());
+        return ParkingLotIdResponse.to(parkingLotApplicationService.listsParkingLotWithSpace());
     }
 
     public CarResponse pick(final PickingDTO pickingDTO) {
