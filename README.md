@@ -1,9 +1,6 @@
 
 # parking-lot-ddd-workshop
 
-## Class UML Graph
-![avatar](graph/domain_model.png)
-
 
 ## Start Application
 
@@ -11,3 +8,11 @@
 ./gradlew build
 ./gradlew bootRun
 ```
+
+## Domain Model UML Graph
+![avatar](graph/domain_model.png)
+
+## Sequence UML Graph
+
+![avatar](graph/sequence.png)
+

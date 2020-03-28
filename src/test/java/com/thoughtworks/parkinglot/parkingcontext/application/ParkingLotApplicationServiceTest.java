@@ -56,7 +56,7 @@ public class ParkingLotApplicationServiceTest {
         final String licensePlate = "川A23456";
         final String parkingBoyId = "BOY001";
         final Ticket expectedTicket = Ticket.of(licensePlate, parkingLotId);
-        given(finderParkingLotService.findParkingLot(any())).willReturn(Optional.of(parkingLot));
+        given(finderParkingLotService.findParkingLot(any(), any())).willReturn(Optional.of(parkingLot));
         given(parkingLot.park(Car.of(licensePlate))).willReturn(expectedTicket);
 
         Ticket actualTicket = parkingLotApplicationService.parkByParkingBoy(parkingBoyId, licensePlate);
@@ -68,7 +68,7 @@ public class ParkingLotApplicationServiceTest {
     public void should_fail_when_all_parking_lot_belong_to_boy_is_full() {
         final String licensePlate = "川A23456";
         final String parkingBoyId = "BOY001";
-        given(finderParkingLotService.findParkingLot(any())).willReturn(Optional.empty());
+        given(finderParkingLotService.findParkingLot(any(), any())).willReturn(Optional.empty());
 
         parkingLotApplicationService.parkByParkingBoy(parkingBoyId, licensePlate);
     }
@@ -77,7 +77,7 @@ public class ParkingLotApplicationServiceTest {
     public void should_return_ticket_by_parking_manager() {
         final String licensePlate = "川A23456";
         final Ticket expectedTicket = Ticket.of(licensePlate, parkingLotId);
-        given(finderParkingLotService.findParkingLot(any())).willReturn(Optional.of(parkingLot));
+        given(finderParkingLotService.findParkingLot(any(), any())).willReturn(Optional.of(parkingLot));
         given(parkingLot.park(Car.of(licensePlate))).willReturn(expectedTicket);
 
         Ticket actualTicket = parkingLotApplicationService.parkByParkingManager(licensePlate);
@@ -88,7 +88,7 @@ public class ParkingLotApplicationServiceTest {
     @Test(expected = NoEnoughCapacityException.class)
     public void should_fail_when_all_parking_lot_belong_to_manager_is_full() {
         final String licensePlate = "川A23456";
-        given(finderParkingLotService.findParkingLot(any())).willReturn(Optional.empty());
+        given(finderParkingLotService.findParkingLot(any(), any())).willReturn(Optional.empty());
 
         parkingLotApplicationService.parkByParkingManager(licensePlate);
     }

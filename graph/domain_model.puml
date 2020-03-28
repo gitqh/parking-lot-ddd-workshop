@@ -45,21 +45,21 @@ package parkingcontext <<Core SubDomain>> {
             --
             +ParkingLotFinder newParkingLotFinder()
         }
-        class ParkingBoy {
+        class ParkingBoy <<Value Object>> {
             -String name
             -List<ParkingLot> parkingLots
             -ParkingPolicy parkingPolicy
             --
             +Optional<ParkingLot> find()
         }
-        class ParkingManager {
+        class ParkingManager <<Value Object>> {
             -String name
             -List<ParkingBoy> parkingBoys
             --
             +List<ParkingLot> listParkingLotIds()
             +Optional<ParkingLot> findParkingLot()
         }
-        class ParkingPolicy {
+        interface ParkingPolicy {
             +ParkingLot findParkingLotToPark(Collection<ParkingLot> parkingLots)
         }
         ParkingManagerSpecification -up-|> ParkingLotFinderSpecification
@@ -71,10 +71,10 @@ package parkingcontext <<Core SubDomain>> {
     }
 
     package policy {
-        class SeniorParkingPolicy {
+        class SeniorParkingPolicy <<Value Object>> {
             +ParkingLot findParkingLotToPark(Collection<ParkingLot> parkingLots)
         }
-        class JuniorParkingPolicy {
+        class JuniorParkingPolicy <<Value Object>> {
             +ParkingLot findParkingLotToPark(Collection<ParkingLot> parkingLots)
         }
         SeniorParkingPolicy -up-|> ParkingPolicy
@@ -82,19 +82,19 @@ package parkingcontext <<Core SubDomain>> {
     }
 }
 
-namespace configcontext <<Config SubDomain>> {
-  class ParkingManager <<Entity>> <<Aggregate Root>> {
-     ParkingManagerId id
-     List<ParkingBoyId> parkingBoyIds
+namespace configcontext <<Support SubDomain>> {
+  class ParkingManagerConfig <<Entity>> <<Aggregate Root>> {
+     ParkingManagerConfigId id
+     List<ParkingBoyConfigId> parkingBoyIds
   }
-  class ParkingBoy <<Entity>> <<Aggregate Root>> {
-    ParkingBoyId id
+  class ParkingBoyConfig <<Entity>> <<Aggregate Root>> {
+    ParkingBoyConfigId id
     List<ParkingLotId> parkingLotIds
-    ParkingStrategyName parkingStrategyName
+    ParkingPolicyName name
   }
-  enum ParkingStrategyName
-  ParkingBoy --> ParkingStrategyName
-  ParkingManager --[hidden] ParkingBoy
+  enum ParkingPolicyEnum <<Value Object>>
+  ParkingBoyConfig --> ParkingPolicyEnum
+  ParkingManagerConfig --[hidden] ParkingBoyConfig
 }
 
 @enduml

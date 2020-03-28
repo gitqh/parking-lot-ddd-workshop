@@ -26,16 +26,16 @@ public class ParkingLotApplicationService {
     private final FinderParkingLotService finderParkingLotService;
 
     public Ticket parkByParkingBoy(final String parkingBoyId, final String licensePlate) {
-        var parkingLotFinderSpecification = new ParkingBoySpecification(parkingBoyId, parkingLotFinderFactory);
-        var parkingLot = finderParkingLotService.findParkingLot(parkingLotFinderSpecification)
+        var parkingLotFinderSpecification = new ParkingBoySpecification(parkingBoyId);
+        var parkingLot = finderParkingLotService.findParkingLot(parkingLotFinderSpecification, parkingLotFinderFactory)
                 .orElseThrow(NoEnoughCapacityException::new);
         parkingLotRepository.save(parkingLot);
         return parkingLot.park(Car.of(licensePlate));
     }
 
     public Ticket parkByParkingManager(final String licensePlate) {
-        var parkingLotFinderSpecification = new ParkingManagerSpecification(parkingLotFinderFactory);
-        var parkingLot = finderParkingLotService.findParkingLot(parkingLotFinderSpecification)
+        var parkingLotFinderSpecification = new ParkingManagerSpecification();
+        var parkingLot = finderParkingLotService.findParkingLot(parkingLotFinderSpecification, parkingLotFinderFactory)
                 .orElseThrow(NoEnoughCapacityException::new);
         parkingLotRepository.save(parkingLot);
         return parkingLot.park(Car.of(licensePlate));

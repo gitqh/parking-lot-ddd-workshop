@@ -13,10 +13,9 @@ import lombok.AllArgsConstructor;
 @ValueObject
 public class ParkingBoySpecification implements ParkingLotFinderSpecification {
     private final String parkingBoyId;
-    private final ParkingLotFinderFactory parkingLotFinderFactory;
 
     @Override
-    public ParkingLotFinder findParkingLotFinder() {
+    public ParkingLotFinder findParkingLotFinder(final ParkingLotFinderFactory parkingLotFinderFactory) {
         return parkingLotFinderFactory.newParkingBoy(parkingBoyId);
     }
 }

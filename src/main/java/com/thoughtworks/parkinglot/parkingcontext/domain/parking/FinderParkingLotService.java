@@ -6,7 +6,8 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class FinderParkingLotService {
-    public Optional<ParkingLot> findParkingLot(final ParkingLotFinderSpecification parkingLotFinderSpecification) {
-        return parkingLotFinderSpecification.findParkingLotFinder().findParkingLot();
+    public Optional<ParkingLot> findParkingLot(final ParkingLotFinderSpecification parkingLotFinderSpecification,
+                                               final ParkingLotFinderFactory parkingLotFinderFactory) {
+        return parkingLotFinderSpecification.findParkingLotFinder(parkingLotFinderFactory).findParkingLot();
     }
 }
