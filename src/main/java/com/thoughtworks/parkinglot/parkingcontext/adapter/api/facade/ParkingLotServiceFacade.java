@@ -37,8 +37,7 @@ public class ParkingLotServiceFacade {
     }
 
     public ParkingLotIdResponse listsParkingLotWithSpace() {
-        return parkingLotIdMapper.to(
-                parkingLotApplicationService.listsParkingLotWithSpace());
+        return parkingLotIdMapper.to(parkingLotApplicationService.listsParkingLotWithSpace());
     }
 
     public CarResponse pick(final PickingDTO pickingDTO) {

@@ -36,7 +36,7 @@ public class ParkingLotMemRepository implements ParkingLotRepository {
     }
 
     @Override
-    public void updateParkingLot(final ParkingLot parkingLot) {
-
+    public void save(ParkingLot parkingLot) {
     }
+
 }

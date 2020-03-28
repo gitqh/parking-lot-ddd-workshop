@@ -2,7 +2,6 @@ package com.thoughtworks.parkinglot.configcontext.adapter.repository;
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
-import com.thoughtworks.parkinglot.parkingcontext.domain.exception.ParkingManagerNotFoundException;
 import com.thoughtworks.parkinglot.configcontext.domain.ParkingBoyId;
 import com.thoughtworks.parkinglot.configcontext.domain.ParkingManager;
 import com.thoughtworks.parkinglot.configcontext.domain.ParkingManagerId;
@@ -29,13 +28,6 @@ public class ParkingManagerConfigMemRepository implements ParkingManagerReposito
         );
 
         parkingManagers.add(defaultParkingManager);
-    }
-
-    @Override
-    public ParkingManager findByName(final String parkingManagerName) {
-        return parkingManagers.stream()
-                .filter(manager -> parkingManagerName.equals(manager.getName()))
-                .findFirst().orElseThrow(ParkingManagerNotFoundException::new);
     }
 
     @Override

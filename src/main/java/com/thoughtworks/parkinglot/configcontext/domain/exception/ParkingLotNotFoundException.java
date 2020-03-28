@@ -1,4 +1,4 @@
-package com.thoughtworks.parkinglot.parkingcontext.domain.exception;
+package com.thoughtworks.parkinglot.configcontext.domain.exception;
 
 /**
  * @author gitqh

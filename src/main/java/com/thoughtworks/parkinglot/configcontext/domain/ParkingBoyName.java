@@ -2,14 +2,14 @@ package com.thoughtworks.parkinglot.configcontext.domain;
 
 import com.thoughtworks.parkinglot.annotation.ValueObject;
 import lombok.AllArgsConstructor;
-import lombok.Getter;
+import lombok.Value;
 
 /**
  * @author gitqh
  */
 @AllArgsConstructor(staticName = "of")
-@Getter
+@Value
 @ValueObject
-public class ParkingPolicyName {
-    private String name;
+public class ParkingBoyName {
+    private String value;
 }

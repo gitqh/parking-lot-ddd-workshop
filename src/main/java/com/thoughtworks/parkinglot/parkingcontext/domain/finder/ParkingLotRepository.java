@@ -12,5 +12,5 @@ public interface ParkingLotRepository {
 
     List<ParkingLot> findByIds(List<ParkingLotId> parkingLotIds);
 
-    void updateParkingLot(ParkingLot parkingLot);
+    void save(ParkingLot parkingLot);
 }

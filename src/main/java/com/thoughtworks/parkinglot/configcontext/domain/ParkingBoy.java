@@ -14,7 +14,7 @@ import lombok.Getter;
 @Entity
 public class ParkingBoy {
     private ParkingBoyId id;
-    private String name;
+    private ParkingBoyName name;
     private List<ParkingLotId> parkingLotIds;
-    private ParkingPolicyName parkingPolicyName;
+    private String parkingPolicy;
 }

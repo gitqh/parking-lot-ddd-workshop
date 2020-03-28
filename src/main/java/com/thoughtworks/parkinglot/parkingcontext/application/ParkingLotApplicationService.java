@@ -29,6 +29,7 @@ public class ParkingLotApplicationService {
         var parkingLotFinderSpecification = new ParkingBoySpecification(parkingBoyId, parkingLotFinderFactory);
         var parkingLot = finderParkingLotService.findParkingLot(parkingLotFinderSpecification)
                 .orElseThrow(NoEnoughCapacityException::new);
+        parkingLotRepository.save(parkingLot);
         return parkingLot.park(Car.of(licensePlate));
     }
 
@@ -36,6 +37,7 @@ public class ParkingLotApplicationService {
         var parkingLotFinderSpecification = new ParkingManagerSpecification(parkingLotFinderFactory);
         var parkingLot = finderParkingLotService.findParkingLot(parkingLotFinderSpecification)
                 .orElseThrow(NoEnoughCapacityException::new);
+        parkingLotRepository.save(parkingLot);
         return parkingLot.park(Car.of(licensePlate));
     }
 
