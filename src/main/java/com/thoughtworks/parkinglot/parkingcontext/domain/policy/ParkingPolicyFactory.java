@@ -8,11 +8,11 @@ import org.springframework.stereotype.Component;
  */
 @Component
 public class ParkingPolicyFactory {
-    public ParkingPolicy createParkingPolicy(ParkingPolicyEnum parkingPolicyEnum) {
+    public ParkingPolicy createParkingPolicy(final ParkingPolicyEnum parkingPolicyEnum) {
         switch (parkingPolicyEnum) {
-            case FIRST:
+            case FIRST_PRIORITY:
                 return JuniorParkingPolicy.of();
-            case MAX_SPACE:
+            case MAX_SPACE_PRIORITY:
                 return SeniorParkingParkingPolicy.of();
             default:
                 throw new IllegalStateException("Unexpected value: " + parkingPolicyEnum);

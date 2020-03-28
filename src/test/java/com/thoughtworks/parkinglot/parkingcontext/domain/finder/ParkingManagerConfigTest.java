@@ -16,7 +16,7 @@ import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
 @RunWith(MockitoJUnitRunner.class)
-public class ParkingManagerTest {
+public class ParkingManagerConfigTest {
     @Mock
     private ParkingBoy boy1;
     @Mock

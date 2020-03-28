@@ -1,7 +1,9 @@
 package com.thoughtworks.parkinglot.parkingcontext.adapter.api.facade;
 
 import com.thoughtworks.parkinglot.configcontext.application.ParkingConfigApplicationService;
-import com.thoughtworks.parkinglot.configcontext.domain.ParkingBoyId;
+import com.thoughtworks.parkinglot.configcontext.domain.ParkingBoyConfig;
+import com.thoughtworks.parkinglot.configcontext.domain.ParkingBoyConfigId;
+import com.thoughtworks.parkinglot.configcontext.domain.ParkingManagerConfig;
 import com.thoughtworks.parkinglot.parkingcontext.domain.finder.ParkingBoy;
 import com.thoughtworks.parkinglot.parkingcontext.domain.finder.ParkingLotRepository;
 import com.thoughtworks.parkinglot.parkingcontext.domain.finder.ParkingManager;
@@ -25,8 +27,8 @@ public class ParkingLotFinderFactoryImpl implements ParkingLotFinderFactory {
 
     @Override
     public ParkingLotFinder newParkingBoy(final String id) {
-        com.thoughtworks.parkinglot.configcontext.domain.ParkingBoy parkingBoy =
-                parkingConfigApplicationService.findParkingBoy(new ParkingBoyId(id));
+        ParkingBoyConfig parkingBoy =
+                parkingConfigApplicationService.findParkingBoy(new ParkingBoyConfigId(id));
         var parkingLots = parkingLotRepository.findByIds((parkingBoy.getParkingLotIds()));
         var parkingPolicy = parkingPolicyFactory.createParkingPolicy(ParkingPolicyEnum.valueOf(parkingBoy.getParkingPolicy()));
         return ParkingBoy.of(parkingBoy.getName().getValue(), parkingLots, parkingPolicy);
@@ -34,12 +36,12 @@ public class ParkingLotFinderFactoryImpl implements ParkingLotFinderFactory {
 
     @Override
     public ParkingLotFinder newParkingManager() {
-        com.thoughtworks.parkinglot.configcontext.domain.ParkingManager parkingManager =
+        ParkingManagerConfig parkingManagerConfig =
                 parkingConfigApplicationService.findParkingManager();
-        var parkingBoys = parkingManager.getParkingBoyIds().stream()
+        var parkingBoys = parkingManagerConfig.getParkingBoyConfigIds().stream()
                 .map(id -> this.newParkingBoy(id.getValue()))
                 .map(finder -> (ParkingBoy) finder)
                 .collect(Collectors.toList());
-        return ParkingManager.of(parkingManager.getName(), parkingBoys);
+        return ParkingManager.of(parkingManagerConfig.getName(), parkingBoys);
     }
 }

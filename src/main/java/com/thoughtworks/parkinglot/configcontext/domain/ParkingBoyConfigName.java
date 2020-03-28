@@ -10,6 +10,6 @@ import lombok.Value;
 @AllArgsConstructor(staticName = "of")
 @Value
 @ValueObject
-public class ParkingBoyName {
+public class ParkingBoyConfigName {
     private String value;
 }

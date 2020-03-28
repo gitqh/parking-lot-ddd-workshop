@@ -11,8 +11,8 @@ import lombok.EqualsAndHashCode;
 @Data
 @EqualsAndHashCode(callSuper = false)
 @ValueObject
-public class ParkingBoyId extends AbstractId {
-    public ParkingBoyId(final String value) {
+public class ParkingManagerConfigId extends AbstractId {
+    public ParkingManagerConfigId(final String value) {
         super(value);
     }
 }

@@ -2,6 +2,7 @@ package com.thoughtworks.parkinglot.architecture;
 
 import static com.tngtech.archunit.library.Architectures.onionArchitecture;
 
+import com.tngtech.archunit.core.importer.ImportOption;
 import com.tngtech.archunit.junit.AnalyzeClasses;
 import com.tngtech.archunit.junit.ArchTest;
 import com.tngtech.archunit.junit.ArchUnitRunner;
@@ -12,9 +13,8 @@ import org.junit.runner.RunWith;
  * @author gitqh
  */
 @RunWith(ArchUnitRunner.class)
-@AnalyzeClasses(packages = "com.thoughtworks.parkinglot")
+@AnalyzeClasses(packages = "com.thoughtworks.parkinglot", importOptions = { ImportOption.DoNotIncludeTests.class })
 public class HexagonalArchitectureTest {
-
 
     @ArchTest
     static final ArchRule hexagonal_architecture_is_respected = onionArchitecture()

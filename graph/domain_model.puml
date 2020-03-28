@@ -41,7 +41,7 @@ package parkingcontext <<Core SubDomain>> {
             +ParkingLotFinder newParkingLotFinder()
         }
         class ParkingBoySpecification {
-            -ParkingBoyId parkingBoyId
+            -ParkingBoyId parkingBoyConfigId
             --
             +ParkingLotFinder newParkingLotFinder()
         }

@@ -2,9 +2,9 @@ package com.thoughtworks.parkinglot.configcontext.adapter.repository;
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
-import com.thoughtworks.parkinglot.configcontext.domain.ParkingBoy;
-import com.thoughtworks.parkinglot.configcontext.domain.ParkingBoyId;
-import com.thoughtworks.parkinglot.configcontext.domain.ParkingBoyName;
+import com.thoughtworks.parkinglot.configcontext.domain.ParkingBoyConfig;
+import com.thoughtworks.parkinglot.configcontext.domain.ParkingBoyConfigId;
+import com.thoughtworks.parkinglot.configcontext.domain.ParkingBoyConfigName;
 import com.thoughtworks.parkinglot.configcontext.domain.ParkingBoyRepository;
 import com.thoughtworks.parkinglot.configcontext.domain.exception.ParkingBoyNotFoundException;
 import com.thoughtworks.parkinglot.parkingcontext.domain.finder.ParkingLotId;
@@ -18,46 +18,46 @@ import org.springframework.stereotype.Repository;
 @SuppressWarnings("checkstyle:magicnumber")
 public class ParkingBoyMemRepository implements ParkingBoyRepository {
 
-    private List<ParkingBoy> parkingBoys = Lists.newArrayList();
+    private List<ParkingBoyConfig> parkingBoys = Lists.newArrayList();
 
     {
-        ParkingBoy allen = ParkingBoy.of(
-                new ParkingBoyId("BOY001"),
-                ParkingBoyName.of("Allen"),
+        ParkingBoyConfig allen = ParkingBoyConfig.of(
+                new ParkingBoyConfigId("BOY001"),
+                ParkingBoyConfigName.of("Allen"),
                 ImmutableList.of(new ParkingLotId("LOT001"), new ParkingLotId("LOT002")
                 ),
-                "FirstPriority"
+                "FIRST_PRIORITY"
         );
 
-        ParkingBoy booker = ParkingBoy.of(
-                new ParkingBoyId("BOY002"),
-                ParkingBoyName.of("Booker"),
+        ParkingBoyConfig booker = ParkingBoyConfig.of(
+                new ParkingBoyConfigId("BOY002"),
+                ParkingBoyConfigName.of("Booker"),
                 ImmutableList.of(new ParkingLotId("LOT003"), new ParkingLotId("LOT004")
                 ),
-                "MaxSpacePriority"
+                "MAX_SPACE_PRIORITY"
         );
 
-        ParkingBoy charles = ParkingBoy.of(
-                new ParkingBoyId("BOY003"),
-                ParkingBoyName.of("harles"),
+        ParkingBoyConfig charles = ParkingBoyConfig.of(
+                new ParkingBoyConfigId("BOY003"),
+                ParkingBoyConfigName.of("harles"),
                 ImmutableList.of(new ParkingLotId("LOT005"), new ParkingLotId("LOT006")
                 ),
-                "FirstPriority"
+                "FIRST_PRIORITY"
         );
 
-        ParkingBoy devin = ParkingBoy.of(
-                new ParkingBoyId("BOY004"),
-                ParkingBoyName.of("Devin"),
+        ParkingBoyConfig devin = ParkingBoyConfig.of(
+                new ParkingBoyConfigId("BOY004"),
+                ParkingBoyConfigName.of("Devin"),
                 ImmutableList.of(new ParkingLotId("LOT007"), new ParkingLotId("LOT008")
                 ),
-                "MaxSpacePriority"
+                "MAX_SPACE_PRIORITY"
         );
 
         parkingBoys.addAll(ImmutableList.of(allen, booker, charles, devin));
     }
 
     @Override
-    public ParkingBoy findById(final String id) {
+    public ParkingBoyConfig findById(final String id) {
         return parkingBoys.stream()
                 .filter(boy -> id.equals(boy.getId()))
                 .findFirst()

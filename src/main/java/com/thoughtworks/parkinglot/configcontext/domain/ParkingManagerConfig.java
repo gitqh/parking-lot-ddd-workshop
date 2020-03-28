@@ -1,7 +1,6 @@
 package com.thoughtworks.parkinglot.configcontext.domain;
 
 import com.thoughtworks.parkinglot.annotation.Entity;
-import com.thoughtworks.parkinglot.parkingcontext.domain.finder.ParkingLotId;
 import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -12,9 +11,8 @@ import lombok.Getter;
 @AllArgsConstructor(staticName = "of")
 @Getter
 @Entity
-public class ParkingBoy {
-    private ParkingBoyId id;
-    private ParkingBoyName name;
-    private List<ParkingLotId> parkingLotIds;
-    private String parkingPolicy;
+public class ParkingManagerConfig {
+    private ParkingManagerConfigId id;
+    private String name;
+    private List<ParkingBoyConfigId> parkingBoyConfigIds;
 }

@@ -7,11 +7,5 @@ import com.thoughtworks.parkinglot.annotation.ValueObject;
  */
 @ValueObject
 public enum ParkingPolicyEnum {
-    FIRST("FirstPriority"), MAX_SPACE("MaxSpacePriority");
-
-    private String policyName;
-
-    ParkingPolicyEnum(String policyName) {
-        this.policyName = policyName;
-    }
+    FIRST_PRIORITY, MAX_SPACE_PRIORITY;
 }
