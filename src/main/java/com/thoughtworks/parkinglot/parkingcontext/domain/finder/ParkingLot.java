@@ -1,7 +1,7 @@
 package com.thoughtworks.parkinglot.parkingcontext.domain.finder;
 
 import com.google.common.collect.Maps;
-import com.thoughtworks.parkinglot.annotation.Entity;
+import com.thoughtworks.parkinglot.common.ddd.annotation.Entity;
 import com.thoughtworks.parkinglot.parkingcontext.domain.exception.IllegalTicketException;
 import com.thoughtworks.parkinglot.parkingcontext.domain.exception.NoEnoughCapacityException;
 import com.thoughtworks.parkinglot.parkingcontext.domain.parking.Car;

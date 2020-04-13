@@ -1,6 +1,6 @@
-package com.thoughtworks.parkinglot.common.model;
+package com.thoughtworks.parkinglot.common.ddd.domain.core;
 
-import com.thoughtworks.parkinglot.annotation.ValueObject;
+import com.thoughtworks.parkinglot.common.ddd.annotation.ValueObject;
 import java.io.Serializable;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;

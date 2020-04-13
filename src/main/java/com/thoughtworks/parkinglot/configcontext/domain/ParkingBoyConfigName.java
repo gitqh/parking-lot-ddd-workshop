@@ -1,6 +1,6 @@
 package com.thoughtworks.parkinglot.configcontext.domain;
 
-import com.thoughtworks.parkinglot.annotation.ValueObject;
+import com.thoughtworks.parkinglot.common.ddd.annotation.ValueObject;
 import lombok.AllArgsConstructor;
 import lombok.Value;
 

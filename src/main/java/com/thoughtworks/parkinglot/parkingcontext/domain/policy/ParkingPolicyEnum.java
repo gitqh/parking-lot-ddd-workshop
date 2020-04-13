@@ -1,6 +1,6 @@
 package com.thoughtworks.parkinglot.parkingcontext.domain.policy;
 
-import com.thoughtworks.parkinglot.annotation.ValueObject;
+import com.thoughtworks.parkinglot.common.ddd.annotation.ValueObject;
 
 /**
  * @author gitqh

@@ -1,6 +1,6 @@
 package com.thoughtworks.parkinglot.configcontext.domain;
 
-import com.thoughtworks.parkinglot.annotation.Entity;
+import com.thoughtworks.parkinglot.common.ddd.annotation.Entity;
 import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Getter;

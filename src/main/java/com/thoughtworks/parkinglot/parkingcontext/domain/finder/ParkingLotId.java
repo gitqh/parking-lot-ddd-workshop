@@ -1,7 +1,7 @@
 package com.thoughtworks.parkinglot.parkingcontext.domain.finder;
 
-import com.thoughtworks.parkinglot.annotation.ValueObject;
-import com.thoughtworks.parkinglot.common.model.AbstractId;
+import com.thoughtworks.parkinglot.common.ddd.annotation.ValueObject;
+import com.thoughtworks.parkinglot.common.ddd.domain.core.AbstractId;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
