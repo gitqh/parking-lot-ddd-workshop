@@ -10,23 +10,22 @@ import java.util.List;
 import java.util.Set;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
-import lombok.Data;
 
 /**
  * @author gitqh
  */
-@Data
+//@Data
 @ReadModel
 public abstract class AggregateRoot extends Entity {
     private final Set<DomainEvent> events = Sets.newHashSet();
     private final Time time;
 
-    public AggregateRoot(AbstractId id, Time time) {
+    public AggregateRoot(final AbstractId id, final Time time) {
         super(id);
         this.time = time;
     }
 
-    public AggregateRoot(AbstractId id) {
+    public AggregateRoot(final AbstractId id) {
         super(id);
         LocalDateTime now = LocalDateTime.now();
         this.time = Time.of(now, now);
@@ -36,7 +35,7 @@ public abstract class AggregateRoot extends Entity {
         return Collections.unmodifiableList(Lists.newArrayList(events));
     }
 
-    protected boolean addEvent(DomainEvent domainEvent) {
+    protected boolean addEvent(final DomainEvent domainEvent) {
         return events.add(domainEvent);
     }
 
@@ -52,16 +51,17 @@ public abstract class AggregateRoot extends Entity {
         return this.time.getUpdatedTime();
     }
 
-    protected <T> AggregateFieldChange<T> change(T newValue, Consumer<T> setConsumer, Supplier<T> getSupplier) {
+    protected <T> AggregateFieldChange<T> change(final T newValue, final Consumer<T> setConsumer,
+                                                 final Supplier<T> getSupplier) {
         AggregateFieldChange<T> aggregateFieldChange = new AggregateFieldChange<>(getSupplier.get(), newValue);
         setConsumer.accept(newValue);
         return aggregateFieldChange;
     }
 
-    protected <T> AggregateFieldChange<T> change(OptionalObject<T> newValue, Consumer<T> setConsumer, Supplier<T> getSupplier) {
-        if (newValue == null) {
-            return null;
-        }
-        return change(newValue.getValue(), )
-    }
+//    protected <T> AggregateFieldChange<T> change(OptionalObject<T> newValue, Consumer<T> setConsumer, Supplier<T> getSupplier) {
+//        if (newValue == null) {
+//            return null;
+//        }
+//        return change(newValue.getValue(), )
+//    }
 }

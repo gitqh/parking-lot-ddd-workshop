@@ -11,7 +11,7 @@ import lombok.Getter;
 public class OptionalObject<T> {
     private final T value;
 
-    public OptionalObject(T value) {
+    public OptionalObject(final T value) {
         this.value = value;
     }
 }

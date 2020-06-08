@@ -8,27 +8,27 @@ skinparam class {
 package parkingcontext <<Core SubDomain>> {
     package parking {
         interface FindParkingLotService {
-            ParkingLot findParkingLot(ParkingLotFinderSpecification)
+            findParkingLot(ParkingLotFinderSpecification): ParkingLot 
         }
         interface ParkingLotFinderSpecification {
-            ParkingLotFinder newParkingLotFinder()
+            newParkingLotFinder(): ParkingLotFinder 
         }
         interface ParkingLotFinder {
-            ParkingLot findParkingLotToPark()
+            findParkingLotToPark(): ParkingLot 
         }
-        class ParkingLot <<Entity>> <<Aggregate>> {
-            -ParkingLotId id
-            -Map<TicketId, Car> ticketToCarMap
+        class ParkingLot <<Aggregate Root>> {
+            id: ParkingLotId 
+            ticketToCarMap: Map<TicketId, Car> 
             --
-            +Ticket park(Car car)
-            +Car pick(TicketId ticketId)
+            park(Car car): Ticket 
+            pick(TicketId ticketId): Car 
         }
         class Ticket <<Value Object>> {
-            -String licensePlate
-            -ParkingLotId parkingLotId
+            licensePlate: String 
+            parkingLotId: ParkingLotId 
         }
         class Car <<Value Object>> {
-            -String licensePlate
+            licensePlate: String 
         }
         FindParkingLotService .down.> ParkingLotFinderSpecification
         ParkingLot "1" *-down-> "many" Ticket
@@ -38,29 +38,29 @@ package parkingcontext <<Core SubDomain>> {
 
     package finder {
         class ParkingManagerSpecification {
-            +ParkingLotFinder newParkingLotFinder()
+            newParkingLotFinder(): ParkingLotFinder 
         }
         class ParkingBoySpecification {
-            -ParkingBoyId parkingBoyConfigId
+            parkingBoyConfigId: ParkingBoyId 
             --
-            +ParkingLotFinder newParkingLotFinder()
+            newParkingLotFinder(): ParkingLotFinder 
         }
         class ParkingBoy <<Value Object>> {
-            -String name
-            -List<ParkingLot> parkingLots
-            -ParkingPolicy parkingPolicy
+            name: String 
+            parkingLots: List<ParkingLot> 
+            parkingPolicy: ParkingPolicy 
             --
-            +Optional<ParkingLot> find()
+            find(): Optional<ParkingLot> 
         }
         class ParkingManager <<Value Object>> {
-            -String name
-            -List<ParkingBoy> parkingBoys
+            name: String 
+            parkingBoys: List<ParkingBoy> 
             --
-            +List<ParkingLot> listParkingLotIds()
-            +Optional<ParkingLot> findParkingLot()
+            listParkingLotIds(): List<ParkingLot> 
+            findParkingLot(): Optional<ParkingLot> 
         }
         interface ParkingPolicy {
-            +ParkingLot findParkingLotToPark(Collection<ParkingLot> parkingLots)
+            findParkingLotToPark(Collection<ParkingLot> parkingLots): ParkingLot 
         }
         ParkingManagerSpecification -up-|> ParkingLotFinderSpecification
         ParkingBoySpecification -up-|> ParkingLotFinderSpecification
@@ -72,28 +72,33 @@ package parkingcontext <<Core SubDomain>> {
 
     package policy {
         class SeniorParkingPolicy <<Value Object>> {
-            +ParkingLot findParkingLotToPark(Collection<ParkingLot> parkingLots)
+            findParkingLotToPark(Collection<ParkingLot> parkingLots): ParkingLot 
         }
         class JuniorParkingPolicy <<Value Object>> {
-            +ParkingLot findParkingLotToPark(Collection<ParkingLot> parkingLots)
+            findParkingLotToPark(Collection<ParkingLot> parkingLots): ParkingLot 
         }
         SeniorParkingPolicy -up-|> ParkingPolicy
         JuniorParkingPolicy -up-|> ParkingPolicy
     }
 }
 
-namespace configcontext <<Support SubDomain>> {
-  class ParkingManagerConfig <<Entity>> <<Aggregate Root>> {
-     ParkingManagerConfigId id
-     List<ParkingBoyConfigId> parkingBoyIds
+package configcontext <<Support SubDomain>> {
+  package parkingmanagerconfig {
+      class ParkingManagerConfig <<Aggregate Root>> {
+          id: ParkingManagerConfigId 
+          parkingBoyIds: List<ParkingBoyConfigId> 
+    }
   }
-  class ParkingBoyConfig <<Entity>> <<Aggregate Root>> {
-    ParkingBoyConfigId id
-    List<ParkingLotId> parkingLotIds
-    ParkingPolicyName name
+  
+  package parkingboyconfig {
+      class ParkingBoyConfig <<Aggregate Root>> {
+            id: ParkingBoyConfigId 
+            parkingLotIds: List<ParkingLotId> 
+            name: ParkingPolicyName 
+      }
+    enum ParkingPolicyEnum <<Value Object>>
+    ParkingBoyConfig --> ParkingPolicyEnum
   }
-  enum ParkingPolicyEnum <<Value Object>>
-  ParkingBoyConfig --> ParkingPolicyEnum
   ParkingManagerConfig --[hidden] ParkingBoyConfig
 }
 

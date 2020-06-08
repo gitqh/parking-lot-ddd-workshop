@@ -1,29 +1,42 @@
 {
   "name": "parking-lot-ddd-workshop",
   "version": "1.0.0",
-  "description": "",
+  "description": "ddd example",
   "main": "index.js",
-  "dependencies": {
-    "cz-conventional-changelog": "^3.1.0"
-  },
-  "devDependencies": {},
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "version": "conventional-changelog -p angular -i CHANGELOG.md -s -r 0 && git add CHANGELOG.md"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/gitqh/parking-lot-ddd-workshop.git"
+    "url": "git+https://github.com/gitqh/parking-lot-ddd-workshop"
+  },
+  "keywords": [
+    "cz",
+    "git",
+    "commit"
+  ],
+  "author": "gitqh",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/gitqh/parking-lot-ddd-workshop/issues"
+  },
+  "homepage": "https://github.com/gitqh/parking-lot-ddd-workshop#readme",
+  "devDependencies": {
+    "@commitlint/cli": "^8.3.5",
+    "@commitlint/config-conventional": "^7.5.0",
+    "conventional-changelog": "^3.1.4",
+    "conventional-changelog-cli": "^2.0.17",
+    "commitizen": "^4.0.4",
+    "husky": "^2.1.0"
   },
   "config": {
     "commitizen": {
       "path": "node_modules/cz-conventional-changelog"
     }
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/gitqh/parking-lot-ddd-workshop/issues"
-  },
-  "homepage": "https://github.com/gitqh/parking-lot-ddd-workshop#readme"
+  "husky": {
+    "hooks": {
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
+    }
+  }
 }
